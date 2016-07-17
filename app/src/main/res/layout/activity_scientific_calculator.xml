@@ -18,7 +18,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="157dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textView" />
+                android:id="@+id/Output" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="89dp"
+                android:layout_height="73dp"
+                android:text="C"
+                android:textSize="25sp"
+                android:id="@+id/buttonC" />
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearlayout"
@@ -140,7 +148,7 @@
             android:layout_height="83dp"
             android:id="@+id/button0"
             android:orientation="horizontal"
-            android:layout_width="115dp"
+            android:layout_width="76dp"
                 android:text="0"
             android:textSize="52sp"  />
 
@@ -173,7 +181,7 @@
             android:textSize="25sp"
             android:id="@+id/buttonmultiply" />
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="="
             android:textSize="25sp"
