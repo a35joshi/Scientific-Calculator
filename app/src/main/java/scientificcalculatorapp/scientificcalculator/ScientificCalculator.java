@@ -218,6 +218,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 }
             }
         });
+        int x;
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
