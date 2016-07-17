@@ -210,6 +210,9 @@ public class ScientificCalculator extends AppCompatActivity {
                 try {
                     clicked = true;
                     output.setText(Float.toString(ArithmeticLogic(op)));
+                    float temp=ArithmeticLogic(op);
+                    numbers.clear();number2.clear();
+                    numbers.add((int)temp);
                 } catch (Exception ex) {
                     throw ex;
                 }
