@@ -14,8 +14,7 @@ public class ScientificCalculator extends AppCompatActivity {
     Button Add,Subtract,Multiply,Divide,zero,one,two,three,four,five,six,seven,eight,nine,C,equal;
     boolean clicked=false;
     List numbers=new ArrayList();
-    int indexfirst=0;
-    int indexsecond=0;
+    List number2=new ArrayList();
     boolean buttonoperatorpressed=false;
     int firstnumber=1;
     int secondnumber=1;
@@ -32,8 +31,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 //click detected!
                clicked=true;
                 buttonoperatorpressed=true;
-                GetFirstandSecondNumbers();
-                finalresult=firstnumber+secondnumber;
+
             }
         });
 
@@ -43,8 +41,6 @@ public class ScientificCalculator extends AppCompatActivity {
                 //click detected!
                 clicked=true;
                 buttonoperatorpressed=true;
-                GetFirstandSecondNumbers();
-                finalresult=firstnumber-secondnumber;
              }
         });
 
@@ -54,9 +50,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 //click detected!
                 clicked=true;
                 buttonoperatorpressed=true;
-                GetFirstandSecondNumbers();
-                finalresult=firstnumber*secondnumber;
-            }
+                 }
         });
 
         Divide.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +59,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 //click detected!
                 clicked=true;
                 buttonoperatorpressed=true;
-                GetFirstandSecondNumbers();
-                finalresult=firstnumber/secondnumber;
-            }
+                 }
         });
 
         one.setOnClickListener(new View.OnClickListener() {
@@ -77,10 +69,11 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
-
+                    number2.add(1);
                 }
                 else
                 {
+                    numbers.add(1);
                 }
             }
         });
@@ -92,9 +85,12 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
+                    number2.add(2);
                 }
                 else
                 {
+
+                    numbers.add(2);
                 }
             }
         });
@@ -106,10 +102,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 //click detected!
                 clicked=true;
                 if(buttonoperatorpressed)
-                {
+                {   number2.add(3);
+
                 }
                 else
                 {
+
+                    numbers.add(3);
                 }
             }
         });
@@ -120,9 +119,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
+                    number2.add(4);
+
                 }
                 else
                 {
+
+                    numbers.add(4);
                 }
             }
         });
@@ -133,9 +136,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
+                    number2.add(5);
+
                 }
                 else
                 {
+
+                    numbers.add(5);
                 }
             }
         });
@@ -146,9 +153,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
+                    number2.add(6);
+
                 }
                 else
                 {
+
+                    numbers.add(6);
                 }
             }
         });
@@ -159,9 +170,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
+                    number2.add(7);
+
                 }
                 else
                 {
+
+                    numbers.add(7);
                 }
             }
         });
@@ -172,9 +187,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
+                    number2.add(8);
+
                 }
                 else
                 {
+
+                    numbers.add(8);
                 }
             }
         });
@@ -185,9 +204,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked=true;
                 if(buttonoperatorpressed)
                 {
+                    number2.add(9);
+
                 }
                 else
                 {
+
+                    numbers.add(9);
                 }
             }
         });
@@ -196,9 +219,8 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 //click detected!
                 clicked=true;
+                numbers.clear();
                 buttonoperatorpressed=false;
-                indexfirst=0;
-                indexsecond=0;
                 firstnumber=0;
                 secondnumber=0;
                 finalresult=0;
@@ -209,9 +231,15 @@ public class ScientificCalculator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //click detected!
-                clicked=true;
-                output.setText(finalresult);
-            }
+                try {
+                    clicked = true;
+                    output.setText(Integer.toString(finalresult));
+                }
+                catch (Exception ex)
+                {
+                    throw  ex;
+                }
+                }
         });
     }
     void InitialiseViews()
@@ -254,5 +282,4 @@ public class ScientificCalculator extends AppCompatActivity {
         int finalint=Integer.parseInt(str.toString());
         return finalint;
     }
-
 }
