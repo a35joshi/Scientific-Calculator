@@ -16,7 +16,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="352dp"
+                android:layout_height="157dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/textView" />
 
@@ -31,7 +31,7 @@
 
             <Button
                 android:layout_height="83dp"
-                android:id="@+id/button"
+                android:id="@+id/button7"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_weight="0.28"
@@ -40,7 +40,7 @@
 
             <Button
                 android:layout_height="83dp"
-                android:id="@+id/button1"
+                android:id="@+id/button8"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_weight="0.28"
@@ -48,7 +48,7 @@
                 android:textSize="52sp" />
             <Button
                 android:layout_height="83dp"
-                android:id="@+id/button2"
+                android:id="@+id/button9"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_weight="0.28"
@@ -67,7 +67,7 @@
 
                 <Button
                     android:layout_height="83dp"
-                    android:id="@+id/button3"
+                    android:id="@+id/button4"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_weight="0.28"
@@ -76,7 +76,7 @@
 
                 <Button
                     android:layout_height="83dp"
-                    android:id="@+id/button4"
+                    android:id="@+id/button5"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_weight="0.28"
@@ -84,7 +84,7 @@
                     android:textSize="52sp" />
                 <Button
                     android:layout_height="83dp"
-                    android:id="@+id/button5"
+                    android:id="@+id/button6"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_weight="0.28"
@@ -103,7 +103,7 @@
 
                 <Button
                     android:layout_height="83dp"
-                    android:id="@+id/button7"
+                    android:id="@+id/button1"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_weight="0.28"
@@ -112,7 +112,7 @@
 
                 <Button
                     android:layout_height="83dp"
-                    android:id="@+id/button8"
+                    android:id="@+id/button2"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_weight="0.28"
@@ -120,7 +120,7 @@
                     android:textSize="52sp"  />
                 <Button
                     android:layout_height="83dp"
-                    android:id="@+id/button9"
+                    android:id="@+id/button3"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_weight="0.28"
