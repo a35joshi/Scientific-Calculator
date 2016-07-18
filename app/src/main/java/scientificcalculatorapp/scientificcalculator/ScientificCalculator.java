@@ -31,7 +31,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked = true;
                 buttonoperatorpressed = true;
                 op = '+';
-
+                onEqualButtonClick();
             }
         });
 
@@ -42,6 +42,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked = true;
                 buttonoperatorpressed = true;
                 op = '-';
+                onEqualButtonClick();
             }
         });
 
@@ -208,11 +209,13 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 //click detected!
                 try {
+                    if(numbers!=null & number2!=null){
                     clicked = true;
                     output.setText(Float.toString(ArithmeticLogic(op)));
                     float temp=ArithmeticLogic(op);
                     numbers.clear();number2.clear();
                     numbers.add((int)temp);
+                    }
                 } catch (Exception ex) {
                     throw ex;
                 }
@@ -274,14 +277,20 @@ public class ScientificCalculator extends AppCompatActivity {
     }
 
     float ArithmeticLogic(char op) {
-        int[] num1 = new int[numbers.size()];
-        for (int i = 0; i < numbers.size(); i++)
-            num1[i] = numbers.get(i);
-        float one = ConvertIntArrayToInt(num1);
-        int[] num2 = new int[number2.size()];
-        for (int i = 0; i < number2.size(); i++)
-            num2[i] = number2.get(i);
-        float two = ConvertIntArrayToInt(num2);
+        float one=0f;
+        float two=0f;
+        if(numbers.size()>0) {
+            int[] num1 = new int[numbers.size()];
+            for (int i = 0; i < numbers.size(); i++)
+                num1[i] = numbers.get(i);
+            one = ConvertIntArrayToInt(num1);
+        }
+        if(number2.size()>0) {
+            int[] num2 = new int[number2.size()];
+            for (int i = 0; i < number2.size(); i++)
+                num2[i] = number2.get(i);
+             two = ConvertIntArrayToInt(num2);
+        }
         if (op == '+') {
             float finalres = one + two;
             return finalres;
@@ -296,5 +305,12 @@ public class ScientificCalculator extends AppCompatActivity {
             return finalres;
         }
         else return 0;
+    }
+    void onEqualButtonClick()
+    {
+        output.setText(Float.toString(ArithmeticLogic(op)));
+        float temp=ArithmeticLogic(op);
+        numbers.clear();number2.clear();
+        numbers.add((int)temp);
     }
 }
