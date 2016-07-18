@@ -53,6 +53,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked = true;
                 buttonoperatorpressed = true;
                 op = '*';
+                onEqualButtonClick();
             }
         });
 
@@ -63,6 +64,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked = true;
                 buttonoperatorpressed = true;
                 op = '/';
+                onEqualButtonClick();
             }
         });
 
@@ -298,9 +300,19 @@ public class ScientificCalculator extends AppCompatActivity {
             float finalres = one - two;
             return finalres;
         } else if (op == '*') {
+            if(two==0f)
+            {
+                float finalres=one*1;
+                return  finalres;
+            }
             float finalres = one * two;
             return finalres;
         } else if (op == '/') {
+            if(two==0f)
+            {
+                float finalres=one/1;
+                return  finalres;
+            }
             float finalres = one / two;
             return finalres;
         }
