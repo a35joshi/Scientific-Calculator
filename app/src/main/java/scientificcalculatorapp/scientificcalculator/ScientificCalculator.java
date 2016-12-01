@@ -1,21 +1,27 @@
 //http://stackoverflow.com/questions/7170233/java-int-to-int
-
+//TEST CASES: Only minues can be first element of input. Cant do a query like *7-2 etc.
 package scientificcalculatorapp.scientificcalculator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScientificCalculator extends AppCompatActivity {
-    Button Add, Subtract, Multiply, Divide, zero, one, two, three, four, five, six, seven, eight, nine, C, equal;
+    Button Add, Subtract, Multiply, Divide, zero, one, two, three, four, five, six, seven, eight, nine, C, equal, DecimalPoint;
+    int[] numberbuttons={R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9};
+    int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
+    EditText input1, input2;
     boolean clicked = false;
     List<Integer> numbers = new ArrayList();
     List<Integer> number2 = new ArrayList();
+    List<Integer> decimalplaces = new ArrayList<>();
     boolean buttonoperatorpressed = false;
+    boolean decimalbuttonpressed = false;
     char op;
     TextView output;
 
@@ -24,6 +30,11 @@ public class ScientificCalculator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific_calculator);
         InitialiseViews();
+        getinput();
+        getoperator();
+    }
+
+    /*private void getoperator() {
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,133 +78,6 @@ public class ScientificCalculator extends AppCompatActivity {
                 onEqualButtonClick();
             }
         });
-
-        one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(1);
-                } else {
-                    numbers.add(1);
-                }
-            }
-        });
-
-        two.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(2);
-                } else {
-
-                    numbers.add(2);
-                }
-            }
-        });
-
-
-        three.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(3);
-
-                } else {
-
-                    numbers.add(3);
-                }
-            }
-        });
-        four.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(4);
-
-                } else {
-
-                    numbers.add(4);
-                }
-            }
-        });
-        five.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(5);
-
-                } else {
-
-                    numbers.add(5);
-                }
-            }
-        });
-        six.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(6);
-
-                } else {
-
-                    numbers.add(6);
-                }
-            }
-        });
-        seven.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(7);
-
-                } else {
-
-                    numbers.add(7);
-                }
-            }
-        });
-        eight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(8);
-
-                } else {
-
-                    numbers.add(8);
-                }
-            }
-        });
-        nine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(9);
-
-                } else {
-
-                    numbers.add(9);
-                }
-            }
-        });
         C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,9 +85,11 @@ public class ScientificCalculator extends AppCompatActivity {
                 clicked = true;
                 numbers.clear();
                 buttonoperatorpressed = false;
+                decimalbuttonpressed = false;
                 output.setText("0");
                 numbers.clear();
                 number2.clear();
+                decimalplaces.clear();
             }
         });
         equal.setOnClickListener(new View.OnClickListener() {
@@ -211,52 +97,57 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 //click detected!
                 try {
-                    if(numbers!=null & number2!=null){
-                    clicked = true;
-                    output.setText(Float.toString(ArithmeticLogic(op)));
-                    float temp=ArithmeticLogic(op);
-                    numbers.clear();number2.clear();
-                    numbers.add((int)temp);
+                    if (numbers != null && number2 != null) {
+                        clicked = true;
+                        output.setText(Float.toString(ArithmeticLogic(op)));
+                        float temp = ArithmeticLogic(op);
+                        numbers.clear();
+                        number2.clear();
+                        numbers.add((int) temp);
                     }
                 } catch (Exception ex) {
                     throw ex;
                 }
             }
         });
-        zero.setOnClickListener(new View.OnClickListener() {
+        DecimalPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //click detected!
                 clicked = true;
-                if (buttonoperatorpressed) {
-                    number2.add(0);
-
-                } else {
-
-                    numbers.add(0);
-                }
+                decimalbuttonpressed = true;
             }
         });
+
+    }*/
+    private void getoperator(){
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button button = (Button) v;
+                output.append(button.getText());
+            }
+        };
+        for (int id : operatorbuttons) {
+            findViewById(id).setOnClickListener(listener);
+        }
+    }
+
+    private void getinput() {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button button = (Button) v;
+                output.append(button.getText());
+            }
+        };
+        for (int id : numberbuttons) {
+            findViewById(id).setOnClickListener(listener);
+        }
     }
 
     void InitialiseViews() {
         try {
-            C = (Button) findViewById(R.id.buttonC);
-            Add = (Button) findViewById(R.id.buttonplus);
-            Subtract = (Button) findViewById(R.id.buttonminus);
-            Multiply = (Button) findViewById(R.id.buttonmultiply);
-            Divide = (Button) findViewById(R.id.buttondivide);
-            zero = (Button) findViewById(R.id.button0);
-            one = (Button) findViewById(R.id.button1);
-            two = (Button) findViewById(R.id.button2);
-            three = (Button) findViewById(R.id.button3);
-            four = (Button) findViewById(R.id.button4);
-            five = (Button) findViewById(R.id.button5);
-            six = (Button) findViewById(R.id.button6);
-            seven = (Button) findViewById(R.id.button7);
-            eight = (Button) findViewById(R.id.button8);
-            nine = (Button) findViewById(R.id.button9);
-            equal = (Button) findViewById(R.id.buttonequal);
             output = (TextView) findViewById(R.id.Output);
         } catch (Exception ex) {
             throw ex;
@@ -281,17 +172,32 @@ public class ScientificCalculator extends AppCompatActivity {
     float ArithmeticLogic(char op) {
         float one=0f;
         float two=0f;
+        float decimal=0f;
+        if(decimalplaces.size()>0)
+        {
+            int[] dec=new int[decimalplaces.size()];
+            for (int i = 0; i < decimalplaces.size(); i++)
+                dec[i] = decimalplaces.get(i);
+            decimal = ConvertIntArrayToInt(dec);
+        }
         if(numbers.size()>0) {
             int[] num1 = new int[numbers.size()];
             for (int i = 0; i < numbers.size(); i++)
                 num1[i] = numbers.get(i);
             one = ConvertIntArrayToInt(num1);
+            if(decimalplaces.size()>0)
+            {
+                one+=(decimal*Math.pow(decimalplaces.size(),10));
+            }
         }
         if(number2.size()>0) {
             int[] num2 = new int[number2.size()];
             for (int i = 0; i < number2.size(); i++)
                 num2[i] = number2.get(i);
              two = ConvertIntArrayToInt(num2);
+            if(buttonoperatorpressed){
+                two+=(decimal*Math.pow(decimalplaces.size(),10));
+            }
         }
         if (op == '+') {
             float finalres = one + two;
@@ -322,7 +228,7 @@ public class ScientificCalculator extends AppCompatActivity {
     {
         output.setText(Float.toString(ArithmeticLogic(op)));
         float temp=ArithmeticLogic(op);
-        numbers.clear();number2.clear();
+        numbers.clear();number2.clear();decimalplaces.clear();
         numbers.add((int)temp);
     }
 }
