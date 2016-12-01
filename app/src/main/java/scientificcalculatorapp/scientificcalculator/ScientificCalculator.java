@@ -17,7 +17,6 @@ public class ScientificCalculator extends AppCompatActivity {
     int[] numberbuttons={R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     EditText input1, input2;
-    boolean clicked = false;
     boolean buttonoperatorpressed = false;
     boolean decimalbuttonpressed = false;
     char op;
