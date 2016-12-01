@@ -46,62 +46,16 @@ public class ScientificCalculator extends AppCompatActivity {
                 output.setText("");
             }
         });
+        findViewById(R.id.buttonDecimalPoint).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //click detected!
+                decimalbuttonpressed = true;
+                output.append(".");
+            }
+        });
     }
 
-    /*private void getoperator() {
-        Add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                buttonoperatorpressed = true;
-                op = '+';
-                onEqualButtonClick();
-            }
-        });
-
-        Subtract.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                buttonoperatorpressed = true;
-                op = '-';
-                onEqualButtonClick();
-            }
-        });
-
-        Multiply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                buttonoperatorpressed = true;
-                op = '*';
-                onEqualButtonClick();
-            }
-        });
-
-        Divide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                buttonoperatorpressed = true;
-                op = '/';
-                onEqualButtonClick();
-            }
-        });
-        DecimalPoint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                decimalbuttonpressed = true;
-            }
-        });
-
-    }*/
     private void getoperator(){
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
