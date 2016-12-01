@@ -61,6 +61,7 @@ public class ScientificCalculator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Button button = (Button) v;
+                buttonoperatorpressed=true;
                 output.append(button.getText());
             }
         };
@@ -75,6 +76,7 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 Button button = (Button) v;
                 output.append(button.getText());
+                buttonoperatorpressed=false;
             }
         };
         for (int id : numberbuttons) {
@@ -92,9 +94,11 @@ public class ScientificCalculator extends AppCompatActivity {
     }
     void onEqualButtonClick()
     {
-        String expressiontoevaluate=output.getText().toString();
-        Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
-        double result=expression.evaluate();
-        output.setText(Double.toString(result));
+        if(!buttonoperatorpressed) {
+            String expressiontoevaluate = output.getText().toString();
+            Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
+            double result = expression.evaluate();
+            output.setText(Double.toString(result));
+        }
     }
 }
