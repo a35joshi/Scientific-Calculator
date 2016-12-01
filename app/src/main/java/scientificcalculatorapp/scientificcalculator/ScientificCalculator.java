@@ -39,6 +39,13 @@ public class ScientificCalculator extends AppCompatActivity {
                 onEqualButtonClick();
             }
         });
+        findViewById(R.id.buttonC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //click detected!
+                output.setText("");
+            }
+        });
     }
 
     /*private void getoperator() {
@@ -83,20 +90,6 @@ public class ScientificCalculator extends AppCompatActivity {
                 buttonoperatorpressed = true;
                 op = '/';
                 onEqualButtonClick();
-            }
-        });
-        C.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //click detected!
-                clicked = true;
-                numbers.clear();
-                buttonoperatorpressed = false;
-                decimalbuttonpressed = false;
-                output.setText("0");
-                numbers.clear();
-                number2.clear();
-                decimalplaces.clear();
             }
         });
         DecimalPoint.setOnClickListener(new View.OnClickListener() {
