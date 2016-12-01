@@ -5,21 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScientificCalculator extends AppCompatActivity {
-    Button Add, Subtract, Multiply, Divide, zero, one, two, three, four, five, six, seven, eight, nine, C, equal, DecimalPoint;
     int[] numberbuttons={R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
-    EditText input1, input2;
     boolean buttonoperatorpressed = false;
-    boolean decimalbuttonpressed = false;
-    char op;
     TextView output;
 
     @Override
@@ -46,7 +39,7 @@ public class ScientificCalculator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //click detected!
-                decimalbuttonpressed = true;
+                buttonoperatorpressed = true;
                 output.append(".");
             }
         });
