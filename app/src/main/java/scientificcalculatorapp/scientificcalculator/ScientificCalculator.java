@@ -51,8 +51,12 @@ public class ScientificCalculator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //click detected!
+                try{
                 buttonoperatorpressed = true;
                 output.append(".");
+                }
+                catch(Exception ex){
+                }
             }
         });
         findViewById(R.id.buttonDEL).setOnClickListener(new View.OnClickListener() {
