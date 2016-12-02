@@ -34,7 +34,11 @@ public class ScientificCalculator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //click detected!
-                output.setText("");
+                try {
+                    output.setText("");
+                }
+                catch (Exception ex) {
+                }
             }
         });
         findViewById(R.id.buttonDecimalPoint).setOnClickListener(new View.OnClickListener() {
@@ -45,12 +49,29 @@ public class ScientificCalculator extends AppCompatActivity {
                 output.append(".");
             }
         });
+        findViewById(R.id.buttonDEL).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    //click detected!
+                    //DELETE THE LAST NUMBER/OPERATOR INPUTTED
+                    String str = output.getText().toString();
+                    str = str.substring(0, str.length() - 1);
+                    // Now set this Text to your edit text
+                    output.setText(str);
+                }
+                catch(Exception ex){
+
+                }
+            }
+        });
     }
 
     private void getoperator(){
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
                 buttonoperatorpressed=true;
                 output.append(button.getText());
@@ -65,6 +86,7 @@ public class ScientificCalculator extends AppCompatActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
                 output.append(button.getText());
                 buttonoperatorpressed=false;
@@ -91,6 +113,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
                 double result = expression.evaluate();
                 output.setText(Double.toString(result));
+                findViewById(R.id.buttonDEL).setClickable(false);
             }
         }
         catch(Exception ex){
