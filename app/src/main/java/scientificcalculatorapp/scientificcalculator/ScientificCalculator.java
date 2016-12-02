@@ -1,6 +1,7 @@
 //http://stackoverflow.com/questions/7170233/java-int-to-int
 //TEST CASES: Only minues can be first element of input. Cant do a query like *7-2 etc.
 package scientificcalculatorapp.scientificcalculator;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ public class ScientificCalculator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific_calculator);
         InitialiseViews();
+        getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getinput();
         getoperator();
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
