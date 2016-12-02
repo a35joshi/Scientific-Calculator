@@ -30,6 +30,12 @@ public class ScientificCalculator extends AppCompatActivity {
                 onEqualButtonClick();
             }
         });
+        findViewById(R.id.buttonANS).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onEqualButtonClick();
+            }
+        });
         findViewById(R.id.buttonC).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
