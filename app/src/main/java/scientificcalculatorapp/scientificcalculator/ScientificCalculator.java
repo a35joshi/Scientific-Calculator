@@ -85,11 +85,16 @@ public class ScientificCalculator extends AppCompatActivity {
     }
     void onEqualButtonClick()
     {
-        if(!buttonoperatorpressed) {
-            String expressiontoevaluate = output.getText().toString();
-            Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
-            double result = expression.evaluate();
-            output.setText(Double.toString(result));
+        try {
+            if (!buttonoperatorpressed) {
+                String expressiontoevaluate = output.getText().toString();
+                Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
+                double result = expression.evaluate();
+                output.setText(Double.toString(result));
+            }
+        }
+        catch(Exception ex){
+            output.setText("SYNTAX ERROR");
         }
     }
 }
