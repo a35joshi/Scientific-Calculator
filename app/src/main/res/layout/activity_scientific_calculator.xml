@@ -21,6 +21,32 @@
                 android:id="@+id/Output"
                 android:background="@android:color/darker_gray" />
 
+            <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_OPEN_BRACKET"
+                    android:orientation="horizontal"
+                    android:layout_width="60dp"
+                    android:text="("
+                    android:textSize="20sp" />
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text=")"
+                    android:id="@+id/button_CLOSE_BRACKET"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearlayout"
         xmlns:tools="http://schemas.android.com/tools"
