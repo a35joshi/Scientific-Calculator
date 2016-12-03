@@ -10,10 +10,14 @@ import android.widget.TextView;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ScientificCalculator extends AppCompatActivity {
     int[] numberbuttons={R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
+    boolean trigopressed=false;
     TextView output;
 
     @Override
@@ -41,6 +45,8 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 //click detected!
                 try {
+                    trigopressed=false;
+                    buttonoperatorpressed = false;
                     output.setText("");
                 }
                 catch (Exception ex) {
@@ -104,6 +110,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 Button button = (Button) v;
                 if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")){
                     output.append(button.getText()+"(");
+                    trigopressed=true;
                 }
                 else {
                     output.append(button.getText());
