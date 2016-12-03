@@ -132,15 +132,29 @@ public class ScientificCalculator extends AppCompatActivity {
         }
 
     }
+    private Function[] TrigFunctions = {
+            new Function("sin"){public double apply(double... args){return Math.sin(Math.toRadians(args[0]));}},
+            new Function("cos"){public double apply(double... args){return Math.cos(Math.toRadians(args[0]));}},
+            new Function("tan"){public double apply(double... args){return Math.tan(Math.toRadians(args[0]));}}
+    };
+
     void onEqualButtonClick()
     {
         try {
             if (!buttonoperatorpressed) {
                 //"cos(deg2rad(0))"
+                //sin(45)
                 String expressiontoevaluate = output.getText().toString();
+                if(trigopressed){
+                    Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
+                    double result = expression.evaluate();
+                    output.setText(Double.toString(result));
+                }
+                else {
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
                     double result = expression.evaluate();
                     output.setText(Double.toString(result));
+                }
                 findViewById(R.id.buttonDEL).setClickable(false);
             }
         }
