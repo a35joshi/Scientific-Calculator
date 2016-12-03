@@ -1,5 +1,5 @@
 //http://stackoverflow.com/questions/7170233/java-int-to-int
-//TEST CASES: Only minues can be first element of input. Cant do a query like *7-2 etc.
+// √
 package scientificcalculatorapp.scientificcalculator;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
+    int[] numberbuttons={R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
@@ -108,7 +108,7 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")){
+                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")){
                     output.append(button.getText()+"(");
                     trigopressed=true;
                 }
@@ -136,7 +136,6 @@ public class ScientificCalculator extends AppCompatActivity {
             new Function("cos"){public double apply(double... args){return Math.cos(Math.toRadians(args[0]));}},
             new Function("tan"){public double apply(double... args){return Math.tan(Math.toRadians(args[0]));}}
     };
-
     void onEqualButtonClick()
     {
         try {
