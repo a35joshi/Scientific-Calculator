@@ -10,10 +10,8 @@ import android.widget.TextView;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-import java.io.Console;
-
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
+    int[] numberbuttons={R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     TextView output;
@@ -69,6 +67,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     //DELETE THE LAST NUMBER/OPERATOR INPUTTED(except SYNTAX ERROR)
                     String str = output.getText().toString();
                     System.out.println(str);
+                    buttonoperatorpressed=false;
                     if(!str.equals("SYNTAX ERROR")) {
                         str = str.substring(0, str.length() - 1);
                         // Now set this Text to your edit text
