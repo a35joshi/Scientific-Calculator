@@ -103,7 +103,7 @@ public class ScientificCalculator extends AppCompatActivity {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
                 if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")){
-                    output.append("("+button.getText());
+                    output.append(button.getText()+"(");
                 }
                 else {
                     output.append(button.getText());
