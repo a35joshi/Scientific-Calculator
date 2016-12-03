@@ -75,9 +75,8 @@ public class ScientificCalculator extends AppCompatActivity {
                     String str = output.getText().toString();
                     System.out.println(str);
                     buttonoperatorpressed=false;
-                    if(!str.equals("SYNTAX ERROR")) {
+                    if(!(str.equals("SYNTAX ERROR") || str.equals("sin") || str.equals("cos") || str.equals("tan"))) {
                         str = str.substring(0, str.length() - 1);
-                        // Now set this Text to your edit text
                         output.setText(str);
                     }
                 }
