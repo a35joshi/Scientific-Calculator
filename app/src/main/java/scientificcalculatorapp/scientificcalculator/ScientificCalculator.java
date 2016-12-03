@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import net.objecthunter.exp4j.function.Function;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -135,10 +136,11 @@ public class ScientificCalculator extends AppCompatActivity {
     {
         try {
             if (!buttonoperatorpressed) {
+                //"cos(deg2rad(0))"
                 String expressiontoevaluate = output.getText().toString();
-                Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
-                double result = expression.evaluate();
-                output.setText(Double.toString(result));
+                    Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
+                    double result = expression.evaluate();
+                    output.setText(Double.toString(result));
                 findViewById(R.id.buttonDEL).setClickable(false);
             }
         }
