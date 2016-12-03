@@ -87,8 +87,8 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                buttonoperatorpressed=true;
                 output.append(button.getText());
+                buttonoperatorpressed=true;
             }
         };
         for (int id : operatorbuttons) {
@@ -102,7 +102,12 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                output.append(button.getText());
+                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")){
+                    output.append("("+button.getText());
+                }
+                else {
+                    output.append(button.getText());
+                }
                 buttonoperatorpressed=false;
             }
         };
