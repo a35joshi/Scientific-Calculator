@@ -48,7 +48,8 @@
                 <Button
                     android:layout_width="58dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button13" />
+                    android:id="@+id/button_CARROT_MARK"
+                    android:text="^" />
             </LinearLayout>
 
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
