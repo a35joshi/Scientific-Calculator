@@ -4,6 +4,7 @@ package scientificcalculatorapp.scientificcalculator;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +19,6 @@ public class ScientificCalculator extends AppCompatActivity {
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
     TextView output;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +124,7 @@ public class ScientificCalculator extends AppCompatActivity {
     void InitialiseViews() {
         try {
             output = (TextView) findViewById(R.id.Output);
+            output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
         } catch (Exception ex) {
             throw ex;
         }
