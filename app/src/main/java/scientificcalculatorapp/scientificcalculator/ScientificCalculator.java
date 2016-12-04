@@ -14,7 +14,7 @@ import net.objecthunter.exp4j.function.Function;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
+    int[] numberbuttons={R.id.button_LOG,R.id.button_LN,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
@@ -106,7 +106,7 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")){
+                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")||button.getText().equals("log")){
                     output.append(button.getText()+"(");
                     trigopressed=true;
                 }

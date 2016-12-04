@@ -50,6 +50,19 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/button_CARROT_MARK"
                     android:text="^" />
+
+                <Button
+                    android:layout_width="42dp"
+                    android:layout_height="wrap_content"
+                    android:text="log"
+                    android:id="@+id/button_LOG"
+                    android:layout_weight="0.32" />
+
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:text="ln"
+                    android:id="@+id/button_LN" />
             </LinearLayout>
 
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
