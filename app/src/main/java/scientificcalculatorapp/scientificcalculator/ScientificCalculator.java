@@ -11,11 +11,9 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
+    int[] numberbuttons={R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
@@ -135,6 +133,9 @@ public class ScientificCalculator extends AppCompatActivity {
             new Function("sin"){public double apply(double... args){return Math.sin(Math.toRadians(args[0]));}},
             new Function("cos"){public double apply(double... args){return Math.cos(Math.toRadians(args[0]));}},
             new Function("tan"){public double apply(double... args){return Math.tan(Math.toRadians(args[0]));}}
+    };
+    private Function[] SquareFunctions = {
+            new Function("square"){public double apply(double... args){return (args[0]*args[0]);}}
     };
     void onEqualButtonClick()
     {

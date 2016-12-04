@@ -40,15 +40,10 @@
                     android:textSize="20sp" />
 
                 <Button
-                    android:layout_width="78dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button11"
-                    android:textSize="20sp" />
-
-                <Button
                     android:layout_width="57dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button12" />
+                    android:id="@+id/button_SQR"
+                    android:text="^2" />
 
                 <Button
                     android:layout_width="58dp"
