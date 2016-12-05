@@ -1,5 +1,4 @@
-//http://stackoverflow.com/questions/7170233/java-int-to-int
-// √
+//WELCOME TO SCIENTIFIC CALCULATOR SOURCE CODE
 package scientificcalculatorapp.scientificcalculator;
 import android.content.Context;
 import android.content.ClipboardManager;
