@@ -1,6 +1,8 @@
 //http://stackoverflow.com/questions/7170233/java-int-to-int
 // √
 package scientificcalculatorapp.scientificcalculator;
+import android.content.Context;
+import android.content.ClipboardManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,17 +10,19 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.button_LOG,R.id.button_LN,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
+    int[] numberbuttons={R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
     TextView output;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,21 @@ public class ScientificCalculator extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getinput();
         getoperator();
+        output.setOnClickListener(new View.OnClickListener() {
+                                      public void onClick(View v) {
+                                          String stringYouExtracted = output.getText().toString();
+                                          //ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                                          //clipboard.setText(stringYouExtracted); }
+                                          if (stringYouExtracted.equals("")) {
+                                              Toast.makeText(getApplicationContext(), "Nothing to Copy", Toast.LENGTH_SHORT).show();
+                                          } else {
+                                              ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                                              android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", stringYouExtracted);
+                                              clipboard.setPrimaryClip(clip);
+                                              Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
+                                          }
+                                      }
+                                  });
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +90,6 @@ public class ScientificCalculator extends AppCompatActivity {
                     //click detected!
                     //DELETE THE LAST NUMBER/OPERATOR INPUTTED(except SYNTAX ERROR)
                     String str = output.getText().toString();
-                    System.out.println(str);
                     buttonoperatorpressed=false;
                     if(!((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt("))){
                         str = str.substring(0, str.length() - 1);
@@ -106,7 +124,10 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")||button.getText().equals("log")){
+                if(output.getText().equals("SYNTAX ERROR")){
+                    output.setEnabled(false);
+                }
+                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")||button.getText().equals("log10")||button.getText().equals("log")||button.getText().equals("log2")){
                     output.append(button.getText()+"(");
                     trigopressed=true;
                 }

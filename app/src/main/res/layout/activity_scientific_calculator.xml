@@ -19,6 +19,7 @@
                 android:layout_height="48dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/Output"
+                android:textIsSelectable="true"
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
@@ -52,17 +53,16 @@
                     android:text="^" />
 
                 <Button
-                    android:layout_width="42dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="log"
-                    android:id="@+id/button_LOG"
-                    android:layout_weight="0.32" />
+                    android:text="log10"
+                    android:id="@+id/button_LOG_10" />
 
                 <Button
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
-                    android:text="ln"
-                    android:id="@+id/button_LN" />
+                    android:text="log2"
+                    android:id="@+id/button_LOG_2" />
             </LinearLayout>
 
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
@@ -100,6 +100,12 @@
                     android:layout_height="wrap_content"
                     android:text="tan"
                     android:id="@+id/buttonTAN" />
+
+                <Button
+                    android:layout_width="59dp"
+                    android:layout_height="wrap_content"
+                    android:text="log"
+                    android:id="@+id/button_LOG_e" />
 
             </LinearLayout>
 
