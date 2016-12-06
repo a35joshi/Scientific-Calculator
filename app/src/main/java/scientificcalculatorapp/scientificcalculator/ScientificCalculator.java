@@ -215,7 +215,6 @@ public class ScientificCalculator extends AppCompatActivity {
     void onEqualButtonClick()
     {
         try {
-            if (!buttonoperatorpressed) {
                 String expressiontoevaluate = output.getText().toString();
                 if(trigopressed){
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
@@ -228,10 +227,6 @@ public class ScientificCalculator extends AppCompatActivity {
                     output.setText(Double.toString(result));
                 }
                 findViewById(R.id.buttonDEL).setClickable(false);
-            }
-            else{
-                output.setText("SYNTAX ERROR");
-            }
         }
         catch(Exception ex){
             output.setText("SYNTAX ERROR");
