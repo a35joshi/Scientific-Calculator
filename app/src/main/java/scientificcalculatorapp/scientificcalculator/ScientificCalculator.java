@@ -1,6 +1,4 @@
 //WELCOME TO SCIENTIFIC CALCULATOR SOURCE CODE
-//DECIMAL FORMATTING TO FOLLOW:
-//DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH); DecimalFormat decimalFormat = new DecimalFormat( "###,###.########" , otherSymbols ); decimalFormat.format(Double.parseDouble(cNumber));
 package scientificcalculatorapp.scientificcalculator;
 import android.content.ClipData;
 import android.content.Context;
