@@ -23,7 +23,7 @@ public class ScientificCalculator extends AppCompatActivity {
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
     TextView output;
-
+    int sdk = android.os.Build.VERSION.SDK_INT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +35,22 @@ public class ScientificCalculator extends AppCompatActivity {
         output.setOnClickListener(new View.OnClickListener() {
                                       public void onClick(View v) {
                                           String stringYouExtracted = output.getText().toString();
-                                          //ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                                          //clipboard.setText(stringYouExtracted); }
-                                          if (stringYouExtracted.equals("")) {
-                                              Toast.makeText(getApplicationContext(), "Nothing to Copy", Toast.LENGTH_SHORT).show();
-                                          } else {
-                                              ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                                              android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", stringYouExtracted);
-                                              clipboard.setPrimaryClip(clip);
+                                          if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                                              android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                                              clipboard.setText(stringYouExtracted);
                                               Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
+                                          }
+                                          else {
+                                              //ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                                              //clipboard.setText(stringYouExtracted); }
+                                              if (stringYouExtracted.equals("")) {
+                                                  Toast.makeText(getApplicationContext(), "Nothing to Copy", Toast.LENGTH_SHORT).show();
+                                              } else {
+                                                  ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                                                  android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", stringYouExtracted);
+                                                  clipboard.setPrimaryClip(clip);
+                                                  Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
+                                              }
                                           }
                                       }
                                   });
