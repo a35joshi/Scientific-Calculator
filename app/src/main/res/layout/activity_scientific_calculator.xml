@@ -19,6 +19,9 @@
                 android:layout_height="48dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/Output"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
                 android:textIsSelectable="true"
                 android:background="@android:color/darker_gray" />
 
@@ -76,7 +79,7 @@
 
                 <Button
                     android:layout_height="wrap_content"
-                    android:id="@+id/button"
+                    android:id="@+id/button_NEGATIVE"
                     android:orientation="horizontal"
                     android:layout_width="59dp"
                     android:text="(-)"

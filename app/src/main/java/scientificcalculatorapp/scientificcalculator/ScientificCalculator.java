@@ -2,12 +2,15 @@
 //DECIMAL FORMATTING TO FOLLOW:
 //DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH); DecimalFormat decimalFormat = new DecimalFormat( "###,###.########" , otherSymbols ); decimalFormat.format(Double.parseDouble(cNumber));
 package scientificcalculatorapp.scientificcalculator;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.ClipboardManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,12 +21,67 @@ import net.objecthunter.exp4j.function.Function;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
+    int[] numberbuttons={R.id.button_NEGATIVE,R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
     TextView output;
     int sdk = android.os.Build.VERSION.SDK_INT;
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle() == "Copy") {
+            String stringYouExtracted = output.getText().toString();
+            if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                clipboard.setText(stringYouExtracted);
+                Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                //ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                //clipboard.setText(stringYouExtracted); }
+                if (stringYouExtracted.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Nothing to Copy", Toast.LENGTH_SHORT).show();
+                } else {
+                    ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", stringYouExtracted);
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        else if (item.getTitle() == "Paste") {
+            String pasteText;
+            // TODO Auto-generated method stub
+            if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB){
+                android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                pasteText = clipboard.getText().toString();
+                output.append(pasteText);
+
+            }else{
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                if(clipboard.hasPrimaryClip()== true){
+                    ClipData.Item item1 = clipboard.getPrimaryClip().getItemAt(0);
+                    pasteText = item1.getText().toString();
+                    output.append(pasteText);
+
+                }else{
+
+                    Toast.makeText(getApplicationContext(), "Nothing to Paste", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }
+        else {
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        //user has long pressed your TextView
+        menu.add(0, v.getId(), 0, "Copy");
+        menu.add(0,v.getId(),0,"Paste");
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,27 +91,9 @@ public class ScientificCalculator extends AppCompatActivity {
         getinput();
         getoperator();
         output.setOnClickListener(new View.OnClickListener() {
-                                      public void onClick(View v) {
-                                          String stringYouExtracted = output.getText().toString();
-                                          if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
-                                              android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                                              clipboard.setText(stringYouExtracted);
-                                              Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
-                                          }
-                                          else {
-                                              //ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                                              //clipboard.setText(stringYouExtracted); }
-                                              if (stringYouExtracted.equals("")) {
-                                                  Toast.makeText(getApplicationContext(), "Nothing to Copy", Toast.LENGTH_SHORT).show();
-                                              } else {
-                                                  ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                                                  android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", stringYouExtracted);
-                                                  clipboard.setPrimaryClip(clip);
-                                                  Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
-                                              }
-                                          }
-                                      }
-                                  });
+            public void onClick(View v) {
+            }
+        });
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,11 +175,15 @@ public class ScientificCalculator extends AppCompatActivity {
                 if(output.getText().equals("SYNTAX ERROR")){
                     output.setEnabled(false);
                 }
+                if(button.getText().equals("(-)")){
+                    output.append("-");
+                }
                 if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")||button.getText().equals("log10")||button.getText().equals("log")||button.getText().equals("log2")){
                     output.append(button.getText()+"(");
                     trigopressed=true;
                 }
                 else {
+                    if(!button.getText().equals("(-)"))
                     output.append(button.getText());
                 }
                 buttonoperatorpressed=false;
@@ -154,6 +198,7 @@ public class ScientificCalculator extends AppCompatActivity {
         try {
             output = (TextView) findViewById(R.id.Output);
             output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+            registerForContextMenu(output);
         } catch (Exception ex) {
             throw ex;
         }
