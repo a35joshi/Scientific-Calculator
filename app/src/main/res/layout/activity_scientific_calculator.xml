@@ -23,6 +23,7 @@
                 android:focusable="true"
                 android:longClickable="true"
                 android:textIsSelectable="true"
+                android:bufferType="spannable"
                 android:background="@android:color/darker_gray" />
 
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"

@@ -19,7 +19,6 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 
-
 public class ScientificCalculator extends AppCompatActivity {
     int[] numberbuttons={R.id.button_NEGATIVE,R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
@@ -90,10 +89,6 @@ public class ScientificCalculator extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getinput();
         getoperator();
-        output.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            }
-        });
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,7 +191,7 @@ public class ScientificCalculator extends AppCompatActivity {
 
     void InitialiseViews() {
         try {
-            output = (TextView) findViewById(R.id.Output);
+            output = (TextView)findViewById(R.id.Output);
             output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
             registerForContextMenu(output);
         } catch (Exception ex) {
