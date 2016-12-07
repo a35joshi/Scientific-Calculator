@@ -10,6 +10,8 @@ import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,61 +27,6 @@ public class ScientificCalculator extends AppCompatActivity {
     TextView output;
     int sdk = android.os.Build.VERSION.SDK_INT;
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        if (item.getTitle() == "Copy") {
-            String stringYouExtracted = output.getText().toString();
-            if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
-                android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboard.setText(stringYouExtracted);
-                Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                //ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                //clipboard.setText(stringYouExtracted); }
-                if (stringYouExtracted.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Nothing to Copy", Toast.LENGTH_SHORT).show();
-                } else {
-                    ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", stringYouExtracted);
-                    clipboard.setPrimaryClip(clip);
-                    Toast.makeText(getApplicationContext(), "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-        else if (item.getTitle() == "Paste") {
-            String pasteText;
-            // TODO Auto-generated method stub
-            if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB){
-                android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                pasteText = clipboard.getText().toString();
-                output.append(pasteText);
-
-            }else{
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                if(clipboard.hasPrimaryClip()== true){
-                    ClipData.Item item1 = clipboard.getPrimaryClip().getItemAt(0);
-                    pasteText = item1.getText().toString();
-                    output.append(pasteText);
-
-                }else{
-
-                    Toast.makeText(getApplicationContext(), "Nothing to Paste", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }
-        else {
-            return false;
-        }
-        return true;
-    }
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        //user has long pressed your TextView
-        menu.add(0, v.getId(), 0, "Copy");
-        menu.add(0,v.getId(),0,"Paste");
-    }
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific_calculator);
@@ -87,6 +34,11 @@ public class ScientificCalculator extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getinput();
         getoperator();
+        output.setOnLongClickListener(new View.OnLongClickListener(){
+            public boolean onLongClick(View v) {
+                    return false;
+        }
+        });
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,6 +144,8 @@ public class ScientificCalculator extends AppCompatActivity {
             output = (TextView)findViewById(R.id.Output);
             output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
             registerForContextMenu(output);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+                    WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         } catch (Exception ex) {
             throw ex;
         }
