@@ -185,6 +185,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     if((start!=str.length()||end!=str.length()) && !((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log("))){
                         str = str.substring(0,start)+ str.substring(end+1);
                         output.setText(str);
+                        output.setSelection(output.getText().length());
                     }
                     else {
                         if(!((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log(")))
