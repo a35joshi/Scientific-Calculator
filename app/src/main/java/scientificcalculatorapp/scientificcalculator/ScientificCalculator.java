@@ -157,12 +157,6 @@ public class ScientificCalculator extends AppCompatActivity {
         findViewById(R.id.buttonDecimalPoint).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-             }
-        });
-        findViewById(R.id.buttonDecimalPoint).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 //click detected!
                 try{
                 buttonoperatorpressed = true;
@@ -179,18 +173,33 @@ public class ScientificCalculator extends AppCompatActivity {
                     //click detected!
                     //DELETE THE LAST NUMBER/OPERATOR INPUTTED(except SYNTAX ERROR)
                     String str = output.getText().toString();
-                    buttonoperatorpressed=false;
+                    buttonoperatorpressed = false;
                     int start = Math.max(output.getSelectionStart(), 0);
                     int end = Math.max(output.getSelectionEnd(), 0);
-                    if((start!=str.length()||end!=str.length()) && !((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log("))){
-                        str = str.substring(0,start)+ str.substring(end+1);
-                        output.setText(str);
-                        output.setSelection(output.getText().length());
+                    //if((start!=str.length()||end!=str.length()) && !((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log("))){
+                    //   str = str.substring(0,start)+ str.substring(end+1);
+                    //   output.setText(str);
+                    //   output.setSelection(output.getText().length());
+                    // }
+                    // else {
+                    //     if(!((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log(")))
+                    //   str=str.substring(0,str.length()-1);
+                    // output.setText(str);
+                    // }
+                    // }
+                    if(start==end) {
+                        String dialled_nos = output.getText().toString();
+                        int remove_index_position = output.getSelectionStart() - 1;
+                        StringBuilder dialled_nos_builder = new StringBuilder(dialled_nos);
+                        if (remove_index_position >= 0) {
+                            dialled_nos_builder.deleteCharAt(remove_index_position);
+                            output.setText(dialled_nos_builder.toString());
+                            output.setSelection(remove_index_position);
+                        }
                     }
-                    else {
-                        if(!((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log(")))
-                        str=str.substring(0,str.length()-1);
-                        output.setText(str);
+                    else{
+                        String selectedStr = output.getText().toString().substring(start, end);    //getting the selected Text
+                        output.setText(output.getText().toString().replace(selectedStr, ""));    //replacing the selected text with empty String and setting it to EditText
                     }
                 }
                 catch(Exception ex){
