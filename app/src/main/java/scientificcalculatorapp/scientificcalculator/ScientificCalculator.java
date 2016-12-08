@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.objecthunter.exp4j.Expression;
@@ -24,7 +25,7 @@ public class ScientificCalculator extends AppCompatActivity {
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
-    TextView output;
+    EditText output;
     int sdk = android.os.Build.VERSION.SDK_INT;
     /*
      @Override
@@ -139,8 +140,15 @@ public class ScientificCalculator extends AppCompatActivity {
                     //DELETE THE LAST NUMBER/OPERATOR INPUTTED(except SYNTAX ERROR)
                     String str = output.getText().toString();
                     buttonoperatorpressed=false;
-                    if(!((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt("))){
-                        str = str.substring(0, str.length() - 1);
+                    int start = Math.max(output.getSelectionStart(), 0);
+                    int end = Math.max(output.getSelectionEnd(), 0);
+                    if((start!=str.length()||end!=str.length()) && !((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log("))){
+                        str = str.substring(0,start)+ str.substring(end+1);
+                        output.setText(str);
+                    }
+                    else {
+                        if(!((str.equals("SYNTAX ERROR") || str.equals("sin(") || str.equals("cos(") || str.equals("tan(")) || str.equals("sqrt(")||str.equals("log10(")||str.equals("log2(")||str.equals("log(")))
+                        str=str.substring(0,str.length()-1);
                         output.setText(str);
                     }
                 }
@@ -157,7 +165,9 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                output.append(button.getText());
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),button.getText(), 0, button.getText().length());
                 buttonoperatorpressed=true;
             }
         };
@@ -176,15 +186,25 @@ public class ScientificCalculator extends AppCompatActivity {
                     output.setEnabled(false);
                 }
                 if(button.getText().equals("(-)")){
-                    output.append("-");
+                    int start = Math.max(output.getSelectionStart(), 0);
+                    int end = Math.max(output.getSelectionEnd(), 0);
+                    output.getText().replace(Math.min(start, end), Math.max(start, end),"-", 0,1);
+                    //output.append("-");
                 }
                 if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")||button.getText().equals("log10")||button.getText().equals("log")||button.getText().equals("log2")){
-                    output.append(button.getText()+"(");
+                    int start = Math.max(output.getSelectionStart(), 0);
+                    int end = Math.max(output.getSelectionEnd(), 0);
+                    output.getText().replace(Math.min(start, end), Math.max(start, end),button.getText()+"(", 0, button.getText().length()+1);
+                    //output.append(button.getText()+"(");
                     trigopressed=true;
                 }
                 else {
-                    if(!button.getText().equals("(-)"))
-                    output.append(button.getText());
+                    if(!button.getText().equals("(-)")){
+                        int start = Math.max(output.getSelectionStart(), 0);
+                        int end = Math.max(output.getSelectionEnd(), 0);
+                        output.getText().replace(Math.min(start, end), Math.max(start, end),button.getText(), 0, button.getText().length());
+                        //output.append(button.getText());
+                    }
                 }
                 buttonoperatorpressed=false;
             }
@@ -196,7 +216,7 @@ public class ScientificCalculator extends AppCompatActivity {
 
     void InitialiseViews() {
         try {
-            output = (TextView)findViewById(R.id.Output);
+            output = (EditText) findViewById(R.id.Output);
             output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
             registerForContextMenu(output);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
