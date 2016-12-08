@@ -6,6 +6,9 @@ import android.content.ClipboardManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -19,14 +22,15 @@ import android.widget.Toast;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
+import net.objecthunter.exp4j.operator.Operator;
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.button_NEGATIVE,R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
+    int[] numberbuttons={R.id.button_FACTORIAL,R.id.button_INVERSE,R.id.button_NEGATIVE,R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
     int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
+    boolean factorialpress=false;
     EditText output;
-    int sdk = android.os.Build.VERSION.SDK_INT;
     /*
      @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -90,10 +94,39 @@ public class ScientificCalculator extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getinput();
         getoperator();
+        output.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                output.setTextColor(Color.BLACK);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+                output.setTextColor(Color.BLACK);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                    output.setTextColor(Color.BLACK);
+            }
+        });
+
         output.setOnLongClickListener(new View.OnLongClickListener(){
             public boolean onLongClick(View v) {
                     return false;
         }
+        });
+        findViewById(R.id.button_FACTORIAL).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                factorialpress=true;
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),"!", 0,1);
+            }
         });
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,11 +147,18 @@ public class ScientificCalculator extends AppCompatActivity {
                 try {
                     trigopressed=false;
                     buttonoperatorpressed = false;
+                    factorialpress=false;
                     output.setText("");
                 }
                 catch (Exception ex) {
                 }
             }
+        });
+        findViewById(R.id.buttonDecimalPoint).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+             }
         });
         findViewById(R.id.buttonDecimalPoint).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,6 +261,7 @@ public class ScientificCalculator extends AppCompatActivity {
             registerForContextMenu(output);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+
         } catch (Exception ex) {
             throw ex;
         }
@@ -234,10 +275,33 @@ public class ScientificCalculator extends AppCompatActivity {
     private Function[] SquareFunctions = {
             new Function("square"){public double apply(double... args){return (args[0]*args[0]);}}
     };
+    Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
+
+        @Override
+        public double apply(double... args) {
+            final int arg = (int) args[0];
+            if ((double) arg != args[0]) {
+                throw new IllegalArgumentException("Operand for factorial has to be an integer");
+            }
+            if (arg < 0) {
+                throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
+            }
+            double result = 1;
+            for (int i = 1; i <= arg; i++) {
+                result *= i;
+            }
+            return result;
+        }
+    };
+
     void onEqualButtonClick()
     {
         try {
                 String expressiontoevaluate = output.getText().toString();
+            if(factorialpress){
+                double result = new ExpressionBuilder(expressiontoevaluate).operator(factorial).build().evaluate();
+                output.setText(Double.toString(result));
+            }
                 if(trigopressed){
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
                     double result = expression.evaluate();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scroll"
-    android:orientation="vertical"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +19,7 @@
                 android:background="@android:color/transparent"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
-            </LinearLayout>
+            </LinearLayout>>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -35,6 +35,46 @@
                 android:bufferType="spannable"
                 android:background="@android:color/darker_gray"
                 android:allowUndo="true" />
+
+            <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal"
+                android:layout_gravity="right" >
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_INVERSE"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:text="^(-1)"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_FACTORIAL"
+                    android:text="!" />
+
+                <Button
+                    android:layout_width="58dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button11" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button12" />
+
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button13" />
+            </LinearLayout>
 
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -153,7 +193,6 @@
                     android:layout_height="wrap_content"
                     android:text=","
                     android:id="@+id/button_COMMA" />
-
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
