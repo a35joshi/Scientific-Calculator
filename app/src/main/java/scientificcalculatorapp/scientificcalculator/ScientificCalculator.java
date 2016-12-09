@@ -98,19 +98,17 @@ public class ScientificCalculator extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                output.setTextColor(Color.BLACK);
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
-                output.setTextColor(Color.BLACK);
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                    output.setTextColor(Color.BLACK);
             }
         });
 
@@ -306,18 +304,18 @@ public class ScientificCalculator extends AppCompatActivity {
 
     void onEqualButtonClick()
     {
-        try {
+           try {
                 String expressiontoevaluate = output.getText().toString();
             if(factorialpress){
                 double result = new ExpressionBuilder(expressiontoevaluate).operator(factorial).build().evaluate();
                 output.setText(Double.toString(result));
             }
-                if(trigopressed){
+              else  if(trigopressed){
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
                     double result = expression.evaluate();
                     output.setText(Double.toString(result));
                 }
-                else {
+                else if(!trigopressed && !factorialpress) {
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
                     double result = expression.evaluate();
                     output.setText(Double.toString(result));
@@ -327,5 +325,6 @@ public class ScientificCalculator extends AppCompatActivity {
         catch(Exception ex){
             output.setText("SYNTAX ERROR");
         }
+        output.setSelection(output.getText().length());
     }
 }
