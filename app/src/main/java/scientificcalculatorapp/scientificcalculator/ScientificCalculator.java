@@ -435,7 +435,15 @@ boolean verify(double result){
             }
               else  if(trigopressed){
                 if(!expressiontoevaluate.contains(")")){
-                    expressiontoevaluate+=")";
+                    int counter = 0;
+                    for( int i=0; i<expressiontoevaluate.length(); i++ ) {
+                        if( expressiontoevaluate.charAt(i) == '(' ) {
+                            counter++;
+                        }
+                    }
+                    for( int i=0; i<counter; i++ ) {
+                        expressiontoevaluate+=")";
+                    }
                 }
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
                     double result = expression.evaluate();
