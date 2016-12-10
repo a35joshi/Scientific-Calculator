@@ -34,24 +34,17 @@ TextView HistoryOutput;
                 HistoryOutput.append(pair.getKey() + " = "+ "\n" + pair.getValue()+"\n");
                 // it.remove(); // avoids a ConcurrentModificationException
             }
-        findViewById(R.id.button_CLEAR_HISTORY).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v){
-            try{
-                hashMap.clear();
-                HistoryOutput.setText("");
+    }
+    public void Send_Clear_History(View view) {
+        try {
+            hashMap.clear();
+            HistoryOutput.setText("");
+            Intent intent = new Intent(this, ScientificCalculator.class);
+            intent.putExtra("hashmap", hashMap);
+            startActivity(intent);
+        }
+        catch (Exception ex){
 
-                Intent resultIntent = new Intent();
-                // TODO Add extras or a data URI to this intent as appropriate.
-                resultIntent.putExtra("hashMap",hashMap);
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            }
-            catch (Exception ex){
-
-            }
-
-            }
-        });
+        }
     }
 }
