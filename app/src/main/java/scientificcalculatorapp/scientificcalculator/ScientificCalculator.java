@@ -145,7 +145,7 @@ public class ScientificCalculator extends AppCompatActivity {
         findViewById(R.id.button_FACTORIAL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!output.getText().toString().equals("SYNTAX ERROR")) {
+                if (!output.getText().toString().equals("SYNTAX ERROR")||!output.getText().toString().equals("MATH ERROR")) {
                     factorialpress = true;
                     int start = Math.max(output.getSelectionStart(), 0);
                     int end = Math.max(output.getSelectionEnd(), 0);
@@ -184,7 +184,7 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 //click detected!
                 try{
-                    if (!output.getText().toString().equals("SYNTAX ERROR")) {
+                    if (!output.getText().toString().equals("SYNTAX ERROR")||!output.getText().toString().equals("MATH ERROR")) {
                         buttonoperatorpressed = true;
                         output.append(".");
                     }
@@ -214,7 +214,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     // output.setText(str);
                     // }
                     // }
-                    if(str.equals("SYNTAX ERROR")) {
+                    if(str.equals("SYNTAX ERROR")||str.equals("MATH ERROR")) {
                         //do nothing
                     }
                     else if(str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
@@ -303,7 +303,7 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                if (!output.getText().toString().equals("SYNTAX ERROR")) {
+                if (!output.getText().toString().equals("SYNTAX ERROR")&&!(output.getText().toString().equals("MATH ERROR"))) {
                     int start = Math.max(output.getSelectionStart(), 0);
                     int end = Math.max(output.getSelectionEnd(), 0);
                     output.getText().replace(Math.min(start, end), Math.max(start, end), button.getText(), 0, button.getText().length());
@@ -322,7 +322,7 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                if (!output.getText().toString().equals("SYNTAX ERROR")) {
+                if (!(output.getText().toString().equals("SYNTAX ERROR"))&&!(output.getText().toString().equals("MATH ERROR"))) {
                     if (button.getText().equals("(-)")) {
                         int start = Math.max(output.getSelectionStart(), 0);
                         int end = Math.max(output.getSelectionEnd(), 0);
