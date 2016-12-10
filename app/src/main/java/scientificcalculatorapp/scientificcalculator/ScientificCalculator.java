@@ -36,6 +36,8 @@ public class ScientificCalculator extends AppCompatActivity {
     boolean buttonoperatorpressed = false;
     boolean trigopressed=false;
     boolean factorialpress=false;
+    private ClipboardManager clipBoard;
+    private boolean addedToClipboard = false;
     EditText output;
     /*
      @Override
@@ -100,11 +102,27 @@ public class ScientificCalculator extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getinput();
         getoperator();
+        clipBoard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        clipBoard.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
+            @Override
+            public void onPrimaryClipChanged() {
+                addedToClipboard = true;
+            }
+        });
+
         output.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (addedToClipboard == true) {
+                    String yourCopiedString = output.getText().toString();
+                    int length = yourCopiedString.length();
+                    Spannable spannable = new SpannableString(yourCopiedString);//set color
+                    spannable.setSpan(new ForegroundColorSpan(Color.BLACK), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannable.setSpan(new RelativeSizeSpan(1.0f), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    addedToClipboard = false;
+                    output.setText(spannable);
+                }
             }
 
             @Override
@@ -192,25 +210,86 @@ public class ScientificCalculator extends AppCompatActivity {
                     // output.setText(str);
                     // }
                     // }
-                    if(start==end) {
-                        String dialled_nos = output.getText().toString();
-                        int remove_index_position = output.getSelectionStart() - 1;
-                        StringBuilder dialled_nos_builder = new StringBuilder(dialled_nos);
-                        if (remove_index_position >= 0) {
-                            dialled_nos_builder.deleteCharAt(remove_index_position);
-                            output.setText(dialled_nos_builder.toString());
-                            output.setSelection(remove_index_position);
+                    if(str.equals("SYNTAX ERROR")) {
+                        //do nothing
+                    }
+                    else if(str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
+                        int lengthView = output.getText().length();
+                        String viewCalString = output.getText().toString();
+                        if(lengthView > 0 && lengthView <=1)
+                            output.getText().delete(lengthView - 1, lengthView);
+                        else
+                        {
+                            if(lengthView > 1)
+                            {
+                                String last4Char = viewCalString.substring(lengthView -4, lengthView);
+
+                                switch(last4Char) {
+                                    case "sin(":
+                                        output.getText().delete(lengthView - 4, lengthView);
+                                        break;
+
+                                    case "cos(":
+                                        output.getText().delete(lengthView - 4, lengthView);
+                                        break;
+                                    case "tan(":
+                                        output.getText().delete(lengthView - 4, lengthView);
+                                        break;
+                                    case "log(":
+                                        output.getText().delete(lengthView - 4, lengthView);
+                                        break;
+                                    case "qrt(":
+                                        output.getText().delete(lengthView - 5, lengthView);
+                                        break;
+                                    case "g10(":
+                                        output.getText().delete(lengthView - 6, lengthView);
+                                        break;
+                                    case "og2(":
+                                        output.getText().delete(lengthView - 5, lengthView);
+                                        break;
+                                    default:
+                                        if (start == end) {
+                                            String dialled_nos = output.getText().toString();
+                                            int remove_index_position = output.getSelectionStart() - 1;
+                                            StringBuilder dialled_nos_builder = new StringBuilder(dialled_nos);
+                                            if (remove_index_position >= 0) {
+                                                dialled_nos_builder.deleteCharAt(remove_index_position);
+                                                output.setText(dialled_nos_builder.toString());
+                                                output.setSelection(remove_index_position);
+                                            }
+                                        } else {
+                                            int remove_index_position = output.getSelectionStart();
+                                            String selectedStr = output.getText().toString().substring(start, end);    //getting the selected Text
+                                            output.setText(output.getText().toString().replace(selectedStr, ""));    //replacing the selected text with empty String and setting it to EditText
+                                            output.setSelection(remove_index_position);
+                                        }
+                                        break;
+                                }  }
                         }
                     }
                     else{
-                        String selectedStr = output.getText().toString().substring(start, end);    //getting the selected Text
-                        output.setText(output.getText().toString().replace(selectedStr, ""));    //replacing the selected text with empty String and setting it to EditText
+
+                        if (start == end) {
+                            String dialled_nos = output.getText().toString();
+                            int remove_index_position = output.getSelectionStart() - 1;
+                            StringBuilder dialled_nos_builder = new StringBuilder(dialled_nos);
+                            if (remove_index_position >= 0) {
+                                dialled_nos_builder.deleteCharAt(remove_index_position);
+                                output.setText(dialled_nos_builder.toString());
+                                output.setSelection(remove_index_position);
+                            }
+                        } else {
+                            int remove_index_position = output.getSelectionStart();
+                            String selectedStr = output.getText().toString().substring(start, end);    //getting the selected Text
+                            output.setText(output.getText().toString().replace(selectedStr, ""));    //replacing the selected text with empty String and setting it to EditText
+                            output.setSelection(remove_index_position);
+                        }
                     }
                 }
-                catch(Exception ex){
+                    catch(Exception ex){
 
+                    }
                 }
-            }
         });
     }
 
