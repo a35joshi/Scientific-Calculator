@@ -461,20 +461,20 @@ boolean verify(double result){
                     }
                 }
             }
-                else if(!trigopressed && !factorialpress) {
-                   Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
-                   double result = expression.evaluate();
-                if(verify(result)){
-                    output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
-                }else {
-                    if(Double.toString(result).contains("E")){
-                        String result1=Double.toString(result).replace("E","*10^");
-                        output.setText(result1);
-                        History_Store.put(expressiontoevaluate,result1);
-                    }
-                    else {
-                        output.setText(Double.toString(result));
-                        History_Store.put(expressiontoevaluate,Double.toString(result));
+                    else if(!trigopressed && !factorialpress) {
+                            Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
+                            double result = expression.evaluate();
+                            if(verify(result)){
+                                output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
+                            }else {
+                                if(Double.toString(result).contains("E")){
+                                    String result1=Double.toString(result).replace("E","*10^");
+                                    output.setText(result1);
+                                    History_Store.put(expressiontoevaluate,result1);
+                                }
+                                else {
+                                    output.setText(Double.toString(result));
+                                    History_Store.put(expressiontoevaluate,Double.toString(result));
                     }
                 }
             }
