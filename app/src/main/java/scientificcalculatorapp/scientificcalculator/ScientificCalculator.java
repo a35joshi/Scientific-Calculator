@@ -3,6 +3,7 @@ package scientificcalculatorapp.scientificcalculator;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.ClipboardManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -296,7 +297,11 @@ public class ScientificCalculator extends AppCompatActivity {
                 }
         });
     }
-
+    public void ShowHistory(View view)
+    {
+        Intent intent = new Intent(this, Show_History_Activity.class);
+        startActivity(intent);
+    }
     private void getoperator(){
         View.OnClickListener listener = new View.OnClickListener() {
             @Override

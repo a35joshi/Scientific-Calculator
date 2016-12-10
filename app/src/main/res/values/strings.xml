@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Scientific Calculator</string>
+    <string name="title_activity_show__history_">My_History</string>
 </resources>

@@ -8,11 +8,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ScientificCalculator"
-                  android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".Show_History_Activity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".ScientificCalculator"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
