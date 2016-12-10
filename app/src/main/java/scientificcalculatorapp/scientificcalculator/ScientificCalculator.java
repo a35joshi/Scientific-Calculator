@@ -35,15 +35,16 @@ import java.util.HashMap;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons={R.id.button_FACTORIAL,R.id.button_INVERSE,R.id.button_NEGATIVE,R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
-    int[] operatorbuttons={R.id.buttonplus,R.id.buttonminus,R.id.buttonmultiply,R.id.buttondivide};
+    int[] numberbuttons = {R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.button_SQR_ROOT, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
+    int[] operatorbuttons = {R.id.buttonplus, R.id.buttonminus, R.id.buttonmultiply, R.id.buttondivide};
     boolean buttonoperatorpressed = false;
-    boolean trigopressed=false;
-    boolean factorialpress=false;
+    boolean trigopressed = false;
+    boolean factorialpress = false;
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
     HashMap<String, Double> History_Store;
+
     /*
      @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -142,17 +143,17 @@ public class ScientificCalculator extends AppCompatActivity {
             }
         });
         //HASH MAP TO STORE HISTORY
-        History_Store = new HashMap<String,Double>();
+        History_Store = new HashMap<String, Double>();
         // valuating
-        output.setOnLongClickListener(new View.OnLongClickListener(){
+        output.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View v) {
-                    return false;
-        }
+                return false;
+            }
         });
         findViewById(R.id.button_FACTORIAL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!output.getText().toString().equals("SYNTAX ERROR")||!output.getText().toString().equals("MATH ERROR")) {
+                if (!output.getText().toString().equals("SYNTAX ERROR") || !output.getText().toString().equals("MATH ERROR")) {
                     factorialpress = true;
                     int start = Math.max(output.getSelectionStart(), 0);
                     int end = Math.max(output.getSelectionEnd(), 0);
@@ -177,12 +178,11 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 //click detected!
                 try {
-                    trigopressed=false;
+                    trigopressed = false;
                     buttonoperatorpressed = false;
-                    factorialpress=false;
+                    factorialpress = false;
                     output.setText("");
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                 }
             }
         });
@@ -190,13 +190,12 @@ public class ScientificCalculator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //click detected!
-                try{
-                    if (!output.getText().toString().equals("SYNTAX ERROR")||!output.getText().toString().equals("MATH ERROR")) {
+                try {
+                    if (!output.getText().toString().equals("SYNTAX ERROR") || !output.getText().toString().equals("MATH ERROR")) {
                         buttonoperatorpressed = true;
                         output.append(".");
                     }
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                 }
             }
         });
@@ -221,21 +220,18 @@ public class ScientificCalculator extends AppCompatActivity {
                     // output.setText(str);
                     // }
                     // }
-                    if(str.equals("SYNTAX ERROR")||str.equals("MATH ERROR")) {
+                    if (str.equals("SYNTAX ERROR") || str.equals("MATH ERROR")) {
                         //do nothing
-                    }
-                    else if(str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
+                    } else if (str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
                         int lengthView = output.getText().length();
                         String viewCalString = output.getText().toString();
-                        if(lengthView > 0 && lengthView <=1)
+                        if (lengthView > 0 && lengthView <= 1)
                             output.getText().delete(lengthView - 1, lengthView);
-                        else
-                        {
-                            if(lengthView > 1)
-                            {
-                                String last4Char = viewCalString.substring(lengthView -4, lengthView);
+                        else {
+                            if (lengthView > 1) {
+                                String last4Char = viewCalString.substring(lengthView - 4, lengthView);
 
-                                switch(last4Char) {
+                                switch (last4Char) {
                                     case "sin(":
                                         output.getText().delete(lengthView - 4, lengthView);
                                         break;
@@ -275,10 +271,10 @@ public class ScientificCalculator extends AppCompatActivity {
                                             output.setSelection(remove_index_position);
                                         }
                                         break;
-                                }  }
+                                }
+                            }
                         }
-                    }
-                    else{
+                    } else {
 
                         if (start == end) {
                             String dialled_nos = output.getText().toString();
@@ -296,18 +292,21 @@ public class ScientificCalculator extends AppCompatActivity {
                             output.setSelection(remove_index_position);
                         }
                     }
-                }
-                    catch(Exception ex){
+                } catch (Exception ex) {
 
-                    }
                 }
+            }
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final HashMap<String, Double> hashMap = (HashMap<String, Double>) data.getSerializableExtra("hashMap");
-        History_Store=hashMap;
+        super.onActivityResult(requestCode, resultCode, data);
+        //if (resultCode == Activity.RESULT_OK) {
+           // History_Store = (HashMap<String, Double>) data.getSerializableExtra("hashMap");
+            History_Store.clear();
     }
+
     public void ShowHistory(View view)
     {
         Intent intent = new Intent(this, Show_History_Activity.class);

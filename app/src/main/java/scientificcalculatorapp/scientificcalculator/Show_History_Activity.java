@@ -19,12 +19,13 @@ import java.util.Set;
 
 public class Show_History_Activity extends AppCompatActivity {
 TextView HistoryOutput;
+    HashMap<String, Double> hashMap=new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show__history_);
         Intent mIntent = getIntent();
-        final HashMap<String, Double> hashMap = (HashMap<String, Double>) mIntent.getSerializableExtra("History_Store");
+        hashMap = (HashMap<String, Double>) mIntent.getSerializableExtra("History_Store");
         //RESTful API giving correct results.
         HistoryOutput = (TextView) findViewById(R.id.Output_History);
             Iterator it = hashMap.entrySet().iterator();
