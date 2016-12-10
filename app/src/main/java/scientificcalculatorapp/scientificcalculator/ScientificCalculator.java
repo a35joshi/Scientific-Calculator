@@ -391,25 +391,60 @@ public class ScientificCalculator extends AppCompatActivity {
             return result;
         }
     };
-
+boolean verify(double result){
+  if(Double.toString(result).equals("-Infinity")||Double.toString(result).equals("Infinity")){
+      return true;
+  }
+    return false;
+}
     void onEqualButtonClick()
     {
            try {
                 String expressiontoevaluate = output.getText().toString();
             if(factorialpress){
                 double result = new ExpressionBuilder(expressiontoevaluate).operator(factorial).build().evaluate();
-                output.setText(Double.toString(result));
+                if(verify(result)){
+                    output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
+                }else {
+                    if(Double.toString(result).contains("E")){
+                        String result1=Double.toString(result).replace("E","*10^");
+                        output.setText(result1);
+                    }
+                    else {
+                        output.setText(Double.toString(result));
+                    }
+                }
             }
               else  if(trigopressed){
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
                     double result = expression.evaluate();
-                    output.setText(Double.toString(result));
+                if(verify(result)){
+                    output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
+                }else {
+                    if(Double.toString(result).contains("E")){
+                      String result1=Double.toString(result).replace("E","*10^");
+                        output.setText(result1);
+                    }
+                    else {
+                        output.setText(Double.toString(result));
+                    }
                 }
+            }
                 else if(!trigopressed && !factorialpress) {
-                    Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
-                    double result = expression.evaluate();
-                    output.setText(Double.toString(result));
+                   Expression expression = new ExpressionBuilder(expressiontoevaluate).build();
+                   double result = expression.evaluate();
+                if(verify(result)){
+                    output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
+                }else {
+                    if(Double.toString(result).contains("E")){
+                        String result1=Double.toString(result).replace("E","*10^");
+                        output.setText(result1);
+                    }
+                    else {
+                        output.setText(Double.toString(result));
+                    }
                 }
+            }
                 findViewById(R.id.buttonDEL).setClickable(false);
         }
         catch(Exception ex){
