@@ -43,7 +43,7 @@ public class ScientificCalculator extends AppCompatActivity {
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
-    HashMap<String, Double> History_Store;
+    HashMap<String, String> History_Store;
 
     /*
      @Override
@@ -143,7 +143,7 @@ public class ScientificCalculator extends AppCompatActivity {
             }
         });
         //HASH MAP TO STORE HISTORY
-        History_Store = new HashMap<String, Double>();
+        History_Store = new HashMap<String, String>();
         // valuating
         output.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View v) {
@@ -425,11 +425,11 @@ boolean verify(double result){
                     if(Double.toString(result).contains("E")){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
-                        History_Store.put(expressiontoevaluate,Double.parseDouble(result1));
+                        History_Store.put(expressiontoevaluate,result1);
                     }
                     else {
                         output.setText(Double.toString(result));
-                        History_Store.put(expressiontoevaluate,result);
+                        History_Store.put(expressiontoevaluate,Double.toString(result));
                     }
                 }
             }
@@ -442,11 +442,11 @@ boolean verify(double result){
                     if(Double.toString(result).contains("E")){
                       String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
-                        History_Store.put(expressiontoevaluate,Double.parseDouble(result1));
+                        History_Store.put(expressiontoevaluate,result1);
                     }
                     else {
                         output.setText(Double.toString(result));
-                        History_Store.put(expressiontoevaluate,result);
+                        History_Store.put(expressiontoevaluate,Double.toString(result));
                     }
                 }
             }
@@ -459,19 +459,20 @@ boolean verify(double result){
                     if(Double.toString(result).contains("E")){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
-                        History_Store.put(expressiontoevaluate,Double.parseDouble(result1));
+                        History_Store.put(expressiontoevaluate,result1);
                     }
                     else {
                         output.setText(Double.toString(result));
-                        History_Store.put(expressiontoevaluate,result);
+                        History_Store.put(expressiontoevaluate,Double.toString(result));
                     }
                 }
             }
                 findViewById(R.id.buttonDEL).setClickable(false);
         }
         catch(Exception ex){
-            output.setText("SYNTAX ERROR");
+
         }
+        //http://stackoverflow.com/questions/6438478/sethinttextcolor-in-edittext
         output.setSelection(output.getText().length());
     }
 }
