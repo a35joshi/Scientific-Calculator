@@ -323,7 +323,6 @@ public class ScientificCalculator extends AppCompatActivity {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
                 if (!output.getText().toString().equals("SYNTAX ERROR")) {
-                    output.setEnabled(false);
                     if (button.getText().equals("(-)")) {
                         int start = Math.max(output.getSelectionStart(), 0);
                         int end = Math.max(output.getSelectionEnd(), 0);
