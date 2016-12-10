@@ -408,7 +408,7 @@ public class ScientificCalculator extends AppCompatActivity {
         }
     };
 boolean verify(double result){
-  if(Double.toString(result).equals("-Infinity")||Double.toString(result).equals("Infinity")){
+  if(Double.toString(result).equals("-Infinity")||Double.toString(result).equals("Infinity")||Double.toString(result).equals("NaN")){
       return true;
   }
     return false;
