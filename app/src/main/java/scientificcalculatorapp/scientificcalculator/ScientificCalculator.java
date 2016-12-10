@@ -1,5 +1,6 @@
 //WELCOME TO SCIENTIFIC CALCULATOR SOURCE CODE
 package scientificcalculatorapp.scientificcalculator;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.ClipboardManager;
@@ -30,6 +31,8 @@ import net.objecthunter.exp4j.function.Function;
 import net.objecthunter.exp4j.operator.Operator;
 import net.objecthunter.exp4j.tokenizer.Tokenizer;
 
+import java.util.HashMap;
+
 
 public class ScientificCalculator extends AppCompatActivity {
     int[] numberbuttons={R.id.button_FACTORIAL,R.id.button_INVERSE,R.id.button_NEGATIVE,R.id.button_LOG_e,R.id.button_LOG_10,R.id.button_LOG_2,R.id.button_CARROT_MARK,R.id.button_SQR,R.id.button_SQR_ROOT,R.id.buttonSIN,R.id.buttonCOS,R.id.buttonTAN,R.id.button0,R.id.button1,R.id.button2,R.id.button3,R.id.button4,R.id.button5,R.id.button6,R.id.button7,R.id.button8,R.id.button9,R.id.button_OPEN_BRACKET,R.id.button_CLOSE_BRACKET,R.id.button_COMMA};
@@ -40,6 +43,7 @@ public class ScientificCalculator extends AppCompatActivity {
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
+    HashMap<String, Double> History_Store;
     /*
      @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -137,7 +141,9 @@ public class ScientificCalculator extends AppCompatActivity {
                                       int before, int count) {
             }
         });
-
+        //HASH MAP TO STORE HISTORY
+        History_Store = new HashMap<String,Double>();
+        // valuating
         output.setOnLongClickListener(new View.OnLongClickListener(){
             public boolean onLongClick(View v) {
                     return false;
@@ -297,9 +303,15 @@ public class ScientificCalculator extends AppCompatActivity {
                 }
         });
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final HashMap<String, Double> hashMap = (HashMap<String, Double>) data.getSerializableExtra("hashMap");
+        History_Store=hashMap;
+    }
     public void ShowHistory(View view)
     {
         Intent intent = new Intent(this, Show_History_Activity.class);
+        intent.putExtra("History_Store", History_Store);
         startActivity(intent);
     }
     private void getoperator(){
@@ -414,9 +426,11 @@ boolean verify(double result){
                     if(Double.toString(result).contains("E")){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
+                        History_Store.put(expressiontoevaluate,Double.parseDouble(result1));
                     }
                     else {
                         output.setText(Double.toString(result));
+                        History_Store.put(expressiontoevaluate,result);
                     }
                 }
             }
@@ -429,9 +443,11 @@ boolean verify(double result){
                     if(Double.toString(result).contains("E")){
                       String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
+                        History_Store.put(expressiontoevaluate,Double.parseDouble(result1));
                     }
                     else {
                         output.setText(Double.toString(result));
+                        History_Store.put(expressiontoevaluate,result);
                     }
                 }
             }
@@ -444,9 +460,11 @@ boolean verify(double result){
                     if(Double.toString(result).contains("E")){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
+                        History_Store.put(expressiontoevaluate,Double.parseDouble(result1));
                     }
                     else {
                         output.setText(Double.toString(result));
+                        History_Store.put(expressiontoevaluate,result);
                     }
                 }
             }
