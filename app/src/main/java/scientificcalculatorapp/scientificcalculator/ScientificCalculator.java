@@ -145,10 +145,12 @@ public class ScientificCalculator extends AppCompatActivity {
         findViewById(R.id.button_FACTORIAL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                factorialpress=true;
-                int start = Math.max(output.getSelectionStart(), 0);
-                int end = Math.max(output.getSelectionEnd(), 0);
-                output.getText().replace(Math.min(start, end), Math.max(start, end),"!", 0,1);
+                if (!output.getText().toString().equals("SYNTAX ERROR")) {
+                    factorialpress = true;
+                    int start = Math.max(output.getSelectionStart(), 0);
+                    int end = Math.max(output.getSelectionEnd(), 0);
+                    output.getText().replace(Math.min(start, end), Math.max(start, end), "!", 0, 1);
+                }
             }
         });
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
@@ -182,8 +184,10 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 //click detected!
                 try{
-                buttonoperatorpressed = true;
-                output.append(".");
+                    if (!output.getText().toString().equals("SYNTAX ERROR")) {
+                        buttonoperatorpressed = true;
+                        output.append(".");
+                    }
                 }
                 catch(Exception ex){
                 }
@@ -299,10 +303,12 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                int start = Math.max(output.getSelectionStart(), 0);
-                int end = Math.max(output.getSelectionEnd(), 0);
-                output.getText().replace(Math.min(start, end), Math.max(start, end),button.getText(), 0, button.getText().length());
-                buttonoperatorpressed=true;
+                if (!output.getText().toString().equals("SYNTAX ERROR")) {
+                    int start = Math.max(output.getSelectionStart(), 0);
+                    int end = Math.max(output.getSelectionEnd(), 0);
+                    output.getText().replace(Math.min(start, end), Math.max(start, end), button.getText(), 0, button.getText().length());
+                    buttonoperatorpressed = true;
+                }
             }
         };
         for (int id : operatorbuttons) {
@@ -316,31 +322,30 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                if(output.getText().equals("SYNTAX ERROR")){
+                if (!output.getText().toString().equals("SYNTAX ERROR")) {
                     output.setEnabled(false);
-                }
-                if(button.getText().equals("(-)")){
-                    int start = Math.max(output.getSelectionStart(), 0);
-                    int end = Math.max(output.getSelectionEnd(), 0);
-                    output.getText().replace(Math.min(start, end), Math.max(start, end),"-", 0,1);
-                    //output.append("-");
-                }
-                if(button.getText().equals("sin")||button.getText().equals("cos")||button.getText().equals("tan")||button.getText().equals("sqrt")||button.getText().equals("log10")||button.getText().equals("log")||button.getText().equals("log2")){
-                    int start = Math.max(output.getSelectionStart(), 0);
-                    int end = Math.max(output.getSelectionEnd(), 0);
-                    output.getText().replace(Math.min(start, end), Math.max(start, end),button.getText()+"(", 0, button.getText().length()+1);
-                    //output.append(button.getText()+"(");
-                    trigopressed=true;
-                }
-                else {
-                    if(!button.getText().equals("(-)")){
+                    if (button.getText().equals("(-)")) {
                         int start = Math.max(output.getSelectionStart(), 0);
                         int end = Math.max(output.getSelectionEnd(), 0);
-                        output.getText().replace(Math.min(start, end), Math.max(start, end),button.getText(), 0, button.getText().length());
-                        //output.append(button.getText());
+                        output.getText().replace(Math.min(start, end), Math.max(start, end), "-", 0, 1);
+                        //output.append("-");
                     }
+                    if (button.getText().equals("sin") || button.getText().equals("cos") || button.getText().equals("tan") || button.getText().equals("sqrt") || button.getText().equals("log10") || button.getText().equals("log") || button.getText().equals("log2")) {
+                        int start = Math.max(output.getSelectionStart(), 0);
+                        int end = Math.max(output.getSelectionEnd(), 0);
+                        output.getText().replace(Math.min(start, end), Math.max(start, end), button.getText() + "(", 0, button.getText().length() + 1);
+                        //output.append(button.getText()+"(");
+                        trigopressed = true;
+                    } else {
+                        if (!button.getText().equals("(-)")) {
+                            int start = Math.max(output.getSelectionStart(), 0);
+                            int end = Math.max(output.getSelectionEnd(), 0);
+                            output.getText().replace(Math.min(start, end), Math.max(start, end), button.getText(), 0, button.getText().length());
+                            //output.append(button.getText());
+                        }
+                    }
+                    buttonoperatorpressed = false;
                 }
-                buttonoperatorpressed=false;
             }
         };
         for (int id : numberbuttons) {
