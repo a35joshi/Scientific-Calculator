@@ -237,14 +237,13 @@
                     android:background="#ac3939" />
 
                 <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
+                    android:layout_width="54dp"
                     android:layout_height="wrap_content"
                     android:text="AC"
-                    android:textSize="25sp"
                     android:id="@+id/buttonC"
-                    android:layout_weight="0.28"
-                    android:background="#ac3939" />
+                    android:background="#ac3939"
+                    android:layout_weight="0.14" />
+
             </LinearLayout>
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/linearlayout"
