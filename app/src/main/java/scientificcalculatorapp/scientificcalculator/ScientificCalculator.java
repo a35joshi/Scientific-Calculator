@@ -434,6 +434,9 @@ boolean verify(double result){
                 }
             }
               else  if(trigopressed){
+                if(!expressiontoevaluate.contains(")")){
+                    expressiontoevaluate+=")";
+                }
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
                     double result = expression.evaluate();
                 if(verify(result)){
@@ -470,7 +473,7 @@ boolean verify(double result){
                 findViewById(R.id.buttonDEL).setClickable(false);
         }
         catch(Exception ex){
-
+            output.setText("SYNTAX ERROR");
         }
         //http://stackoverflow.com/questions/6438478/sethinttextcolor-in-edittext
         output.setSelection(output.getText().length());
