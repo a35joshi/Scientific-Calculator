@@ -39,6 +39,24 @@
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_HISTORY"
+                    android:onClick="ShowHistory"
+                    android:text="HISTORY" />
+
+            </LinearLayout>
+
+            <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,12 +64,22 @@
                 android:orientation="horizontal"
                 android:layout_gravity="right" >
 
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SHIFT"
+                    android:textColor="@android:color/darker_gray"
+                    android:id="@+id/Radio_SHIFT"
+                    android:checked="false"
+                    android:layout_weight="0.12" />
+
                 <Button
                     android:layout_height="wrap_content"
                     android:id="@+id/button_INVERSE"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:text="^(-1)"
+
                     android:textSize="20sp" />
 
                 <Button
@@ -59,14 +87,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/button_FACTORIAL"
                     android:text="!" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button_HISTORY"
-                    android:onClick="ShowHistory"
-                    android:layout_weight="0.79"
-                    android:text="HISTORY" />
 
             </LinearLayout>
 
@@ -141,10 +161,11 @@
                     android:layout_width="57dp"
                     android:layout_height="wrap_content"
                     android:text="cos"
-                    android:id="@+id/buttonCOS" />
+                    android:id="@+id/buttonCOS"
+                    android:layout_weight="0.14" />
 
                 <Button
-                    android:layout_width="58dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="tan"
                     android:id="@+id/buttonTAN" />
@@ -219,7 +240,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button9"
                 android:orientation="horizontal"
-                android:layout_width="78dp"
+                android:layout_width="72dp"
                 android:textSize="25sp"
                 android:text="9" />
 

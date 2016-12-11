@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.objecthunter.exp4j.Expression;
@@ -43,6 +44,7 @@ public class ScientificCalculator extends AppCompatActivity {
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
+    RadioButton shift_button;
     HashMap<String, String> History_Store;
 
     /*
@@ -342,6 +344,9 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
+                if(shift_button.isChecked()){
+
+                }
                 if (!(output.getText().toString().equals("SYNTAX ERROR"))&&!(output.getText().toString().equals("MATH ERROR"))) {
                     if (button.getText().equals("(-)")) {
                         int start = Math.max(output.getSelectionStart(), 0);
@@ -379,6 +384,7 @@ public class ScientificCalculator extends AppCompatActivity {
             output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
             registerForContextMenu(output);
             output.setTextColor(Color.BLACK);
+            shift_button=(RadioButton)findViewById(R.id.Radio_SHIFT);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 
