@@ -115,7 +115,6 @@ public class ScientificCalculator extends AppCompatActivity {
                 addedToClipboard = true;
             }
         });
-
         output.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -158,6 +157,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     int start = Math.max(output.getSelectionStart(), 0);
                     int end = Math.max(output.getSelectionEnd(), 0);
                     output.getText().replace(Math.min(start, end), Math.max(start, end), "!", 0, 1);
+                    output.setTextColor(Color.BLACK);
                 }
             }
         });
@@ -181,6 +181,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     trigopressed = false;
                     buttonoperatorpressed = false;
                     factorialpress = false;
+                    output.setTextColor(Color.BLACK);
                     output.setText("");
                 } catch (Exception ex) {
                 }
@@ -194,6 +195,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     if (!output.getText().toString().equals("SYNTAX ERROR") || !output.getText().toString().equals("MATH ERROR")) {
                         buttonoperatorpressed = true;
                         output.append(".");
+                        output.setTextColor(Color.BLACK);
                     }
                 } catch (Exception ex) {
                 }
@@ -292,6 +294,7 @@ public class ScientificCalculator extends AppCompatActivity {
                             output.setSelection(remove_index_position);
                         }
                     }
+                    output.setTextColor(Color.BLACK);
                 } catch (Exception ex) {
 
                 }
@@ -323,6 +326,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     int start = Math.max(output.getSelectionStart(), 0);
                     int end = Math.max(output.getSelectionEnd(), 0);
                     output.getText().replace(Math.min(start, end), Math.max(start, end), button.getText(), 0, button.getText().length());
+                    output.setTextColor(Color.BLACK);
                     buttonoperatorpressed = true;
                 }
             }
@@ -359,6 +363,7 @@ public class ScientificCalculator extends AppCompatActivity {
                             //output.append(button.getText());
                         }
                     }
+                    output.setTextColor(Color.BLACK);
                     buttonoperatorpressed = false;
                 }
             }
@@ -373,6 +378,7 @@ public class ScientificCalculator extends AppCompatActivity {
             output = (EditText) findViewById(R.id.Output);
             output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
             registerForContextMenu(output);
+            output.setTextColor(Color.BLACK);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 
@@ -481,9 +487,13 @@ boolean verify(double result){
                 findViewById(R.id.buttonDEL).setClickable(false);
         }
         catch(Exception ex){
+            //output.setText(ex.toString());
             output.setText("SYNTAX ERROR");
         }
         //http://stackoverflow.com/questions/6438478/sethinttextcolor-in-edittext
         output.setSelection(output.getText().length());
+        if(output.getText().toString().equals("SYNTAX ERROR")||output.getText().toString().equals("MATH ERROR")){
+            output.setTextColor(Color.RED);
+        }
     }
 }
