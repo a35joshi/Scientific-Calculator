@@ -46,6 +46,18 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="π"
+                    android:id="@+id/button_PI" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_FACTORIAL"
+                    android:text="!" />
+
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/button_HISTORY"
@@ -65,13 +77,6 @@
                 android:layout_gravity="right" >
 
                 <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SHIFT"
-                    android:id="@+id/button_SHIFT" />
-
-                <Button
                     android:layout_height="wrap_content"
                     android:id="@+id/button_INVERSE"
                     android:orientation="horizontal"
@@ -81,16 +86,22 @@
                     android:textSize="20sp" />
 
                 <Button
-                    android:layout_width="57dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button_FACTORIAL"
-                    android:text="!" />
+                    android:text="sin^(-1)"
+                    android:id="@+id/button_SIN_INVERSE" />
 
                 <Button
-                    android:layout_width="41dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="π"
-                    android:id="@+id/button_PI" />
+                    android:text="cos^(-1)"
+                    android:id="@+id/button_COS_INVERSE" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tan^(-1)"
+                    android:id="@+id/button_TAN_INVERSE" />
 
             </LinearLayout>
 

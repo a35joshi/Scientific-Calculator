@@ -36,7 +36,7 @@ import java.util.HashMap;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons = {R.id.button_PI,R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.button_SQR_ROOT, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
+    int[] numberbuttons = {R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.button_SQR_ROOT, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
     int[] operatorbuttons = {R.id.buttonplus, R.id.buttonminus, R.id.buttonmultiply, R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed = false;
@@ -150,10 +150,32 @@ public class ScientificCalculator extends AppCompatActivity {
                 return false;
             }
         });
+        findViewById(R.id.button_SIN_INVERSE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.append("asin(");
+                trigopressed=true;
+            }
+        });
+        findViewById(R.id.button_COS_INVERSE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.append("acos(");
+                trigopressed=true;
+            }
+        });
+        findViewById(R.id.button_TAN_INVERSE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.append("atan(");
+                trigopressed=true;
+            }
+        });
+
         findViewById(R.id.button_PI).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-            output.append(Double.toString(Math.PI));
+            output.append("("+Double.toString(Math.PI)+")");
             }
         });
         findViewById(R.id.button_FACTORIAL).setOnClickListener(new View.OnClickListener() {
@@ -397,7 +419,10 @@ public class ScientificCalculator extends AppCompatActivity {
     private Function[] TrigFunctions = {
             new Function("sin"){public double apply(double... args){return Math.sin(Math.toRadians(args[0]));}},
             new Function("cos"){public double apply(double... args){return Math.cos(Math.toRadians(args[0]));}},
-            new Function("tan"){public double apply(double... args){return Math.tan(Math.toRadians(args[0]));}}
+            new Function("tan"){public double apply(double... args){return Math.tan(Math.toRadians(args[0]));}},
+            new Function("asin"){public double apply(double... args){return Math.toDegrees(Math.asin((args[0])));}},
+            new Function("acos"){public double apply(double... args){return Math.toDegrees(Math.acos(args[0]));}},
+            new Function("atan"){public double apply(double... args){return Math.toDegrees(Math.atan((args[0])));}}
     };
     private Function[] SquareFunctions = {
             new Function("square"){public double apply(double... args){return (args[0]*args[0]);}}
