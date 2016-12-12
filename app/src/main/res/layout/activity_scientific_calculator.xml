@@ -64,14 +64,12 @@
                 android:orientation="horizontal"
                 android:layout_gravity="right" >
 
-                <RadioButton
+                <Button
+                    style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SHIFT"
-                    android:textColor="@android:color/darker_gray"
-                    android:id="@+id/Radio_SHIFT"
-                    android:checked="false"
-                    android:layout_weight="0.12" />
+                    android:id="@+id/button_SHIFT" />
 
                 <Button
                     android:layout_height="wrap_content"
