@@ -253,20 +253,20 @@ public class ScientificCalculator extends AppCompatActivity {
                     // }
                     if (str.equals("SYNTAX ERROR") || str.equals("MATH ERROR")) {
                         //do nothing
-                    } else if (str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
+                    }
+                    else if (str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
                         int lengthView = output.getText().length();
                         String viewCalString = output.getText().toString();
                         if (lengthView > 0 && lengthView <= 1)
                             output.getText().delete(lengthView - 1, lengthView);
                         else {
                             if (lengthView > 1) {
+                                //CharSequene last4Char=output.getText().toString().subSequence(output.getSelectionStart(),0);
                                 String last4Char = viewCalString.substring(lengthView - 4, lengthView);
-
-                                switch (last4Char) {
+                                    switch (last4Char) {
                                     case "sin(":
                                         output.getText().delete(lengthView - 4, lengthView);
                                         break;
-
                                     case "cos(":
                                         output.getText().delete(lengthView - 4, lengthView);
                                         break;
