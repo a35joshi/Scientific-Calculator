@@ -86,6 +86,12 @@
                     android:id="@+id/button_FACTORIAL"
                     android:text="!" />
 
+                <Button
+                    android:layout_width="41dp"
+                    android:layout_height="wrap_content"
+                    android:text="π"
+                    android:id="@+id/button_PI" />
+
             </LinearLayout>
 
             <LinearLayout tools:context="scientificcalculatorapp.scientificcalculator.ScientificCalculator"

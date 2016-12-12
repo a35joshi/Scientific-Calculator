@@ -36,7 +36,7 @@ import java.util.HashMap;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons = {R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.button_SQR_ROOT, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
+    int[] numberbuttons = {R.id.button_PI,R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.button_SQR_ROOT, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
     int[] operatorbuttons = {R.id.buttonplus, R.id.buttonminus, R.id.buttonmultiply, R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed = false;
@@ -44,7 +44,6 @@ public class ScientificCalculator extends AppCompatActivity {
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
-    RadioButton shift_button;
     HashMap<String, String> History_Store;
 
     /*
@@ -149,6 +148,12 @@ public class ScientificCalculator extends AppCompatActivity {
         output.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View v) {
                 return false;
+            }
+        });
+        findViewById(R.id.button_PI).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+            output.append(Double.toString(Math.PI));
             }
         });
         findViewById(R.id.button_FACTORIAL).setOnClickListener(new View.OnClickListener() {
@@ -344,9 +349,6 @@ public class ScientificCalculator extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(R.id.buttonDEL).setClickable(true);
                 Button button = (Button) v;
-                if(shift_button.isChecked()){
-
-                }
                 if (!(output.getText().toString().equals("SYNTAX ERROR"))&&!(output.getText().toString().equals("MATH ERROR"))) {
                     if (button.getText().equals("(-)")) {
                         int start = Math.max(output.getSelectionStart(), 0);
@@ -384,7 +386,6 @@ public class ScientificCalculator extends AppCompatActivity {
             output.setGravity(Gravity.CENTER | Gravity.BOTTOM);
             registerForContextMenu(output);
             output.setTextColor(Color.BLACK);
-            shift_button=(RadioButton)findViewById(R.id.Radio_SHIFT);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 
