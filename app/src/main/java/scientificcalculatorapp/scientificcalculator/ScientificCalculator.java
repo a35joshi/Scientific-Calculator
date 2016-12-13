@@ -261,7 +261,7 @@ public class ScientificCalculator extends AppCompatActivity {
                             output.getText().delete(lengthView - 1, lengthView);
                         else {
                             if (lengthView > 1) {
-                                //CharSequene last4Char=output.getText().toString().subSequence(output.getSelectionStart(),0);
+                                //CharSequence last4Char=output.getText().toString().subSequence(output.getSelectionStart(),0);
                                 String last4Char = viewCalString.substring(lengthView - 4, lengthView);
                                     switch (last4Char) {
                                     case "sin(":
@@ -472,16 +472,19 @@ boolean verify(double result){
                 }
             }
               else  if(trigopressed){
-                if(!expressiontoevaluate.contains(")")){
-                    int counter = 0;
+                    int counter_open_brackets = 0;
+                    int counter_close_brackets=0;
                     for( int i=0; i<expressiontoevaluate.length(); i++ ) {
                         if( expressiontoevaluate.charAt(i) == '(' ) {
-                            counter++;
+                            counter_open_brackets++;
+                        }
+                        if( expressiontoevaluate.charAt(i) == ')' ) {
+                            counter_close_brackets++;
                         }
                     }
-                    for( int i=0; i<counter; i++ ) {
-                        expressiontoevaluate+=")";
-                    }
+                while(counter_close_brackets!=counter_open_brackets){
+                    counter_close_brackets++;
+                    expressiontoevaluate+=")";
                 }
                     Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
                     double result = expression.evaluate();
