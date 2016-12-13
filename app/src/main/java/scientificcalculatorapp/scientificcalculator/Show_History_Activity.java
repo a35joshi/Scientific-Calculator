@@ -25,6 +25,7 @@ TextView HistoryOutput;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show__history_);
         Intent mIntent = getIntent();
+        //shouldn't this be String now?
         hashMap = (HashMap<String, Double>) mIntent.getSerializableExtra("History_Store");
         //RESTful API giving correct results.
         HistoryOutput = (TextView) findViewById(R.id.Output_History);
