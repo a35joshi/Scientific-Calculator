@@ -36,7 +36,7 @@ import java.util.HashMap;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons = {R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.button_SQR_ROOT, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
+    int[] numberbuttons = {R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
     int[] operatorbuttons = {R.id.buttonplus, R.id.buttonminus, R.id.buttonmultiply, R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed = false;
@@ -153,29 +153,51 @@ public class ScientificCalculator extends AppCompatActivity {
         findViewById(R.id.button_SIN_INVERSE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                output.append("asin(");
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),"asin(", 0, 5);
+                output.setTextColor(Color.BLACK);
                 trigopressed=true;
             }
         });
         findViewById(R.id.button_COS_INVERSE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                output.append("acos(");
-                trigopressed=true;
-            }
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),"acos(", 0, 5);
+                output.setTextColor(Color.BLACK);
+                trigopressed=true;}
         });
         findViewById(R.id.button_TAN_INVERSE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                output.append("atan(");
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),"atan(", 0,5);
+                output.setTextColor(Color.BLACK);
                 trigopressed=true;
             }
         });
 
+        findViewById(R.id.button_SQR_ROOT).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),"sqrt(", 0, 5);
+                output.setTextColor(Color.BLACK);
+                trigopressed=true;
+            }
+        });
         findViewById(R.id.button_PI).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-            output.append("("+Double.toString(Math.PI)+")");
+                Button button=(Button)v;
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),"("+Math.PI+")", 0, button.getText().length()+18);
+                output.setTextColor(Color.BLACK);
             }
         });
         findViewById(R.id.button_FACTORIAL).setOnClickListener(new View.OnClickListener() {
@@ -223,9 +245,10 @@ public class ScientificCalculator extends AppCompatActivity {
                 try {
                     if (!output.getText().toString().equals("SYNTAX ERROR") || !output.getText().toString().equals("MATH ERROR")) {
                         buttonoperatorpressed = true;
-                        output.append(".");
-                        output.setTextColor(Color.BLACK);
-                    }
+                        int start = Math.max(output.getSelectionStart(), 0);
+                        int end = Math.max(output.getSelectionEnd(), 0);
+                        output.getText().replace(Math.min(start, end), Math.max(start, end),".", 0, 1);
+                        output.setTextColor(Color.BLACK);}
                 } catch (Exception ex) {
                 }
             }
