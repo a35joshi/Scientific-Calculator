@@ -36,7 +36,7 @@ import java.util.HashMap;
 
 
 public class ScientificCalculator extends AppCompatActivity {
-    int[] numberbuttons = {R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
+    int[] numberbuttons = {R.id.button_CUBE,R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
     int[] operatorbuttons = {R.id.buttonplus, R.id.buttonminus, R.id.buttonmultiply, R.id.buttondivide};
     boolean buttonoperatorpressed = false;
     boolean trigopressed = false;
@@ -45,7 +45,6 @@ public class ScientificCalculator extends AppCompatActivity {
     private boolean addedToClipboard = false;
     EditText output;
     HashMap<String, String> History_Store;
-
     /*
      @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -471,7 +470,7 @@ public class ScientificCalculator extends AppCompatActivity {
             if ((double) arg != args[0]) {
                 throw new IllegalArgumentException("Operand for factorial has to be an integer");
             }
-            if (arg < 0) {
+            if (args[0] < 0) {
                 throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
             }
             double result = 1;
@@ -494,8 +493,9 @@ boolean verify(double result){
             if(factorialpress){
                 double result = new ExpressionBuilder(expressiontoevaluate).operator(factorial).build().evaluate();
                 if(verify(result)){
-                    output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
-                }else {
+                     output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
+                }
+                else {
                     if(Double.toString(result).contains("E")){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);

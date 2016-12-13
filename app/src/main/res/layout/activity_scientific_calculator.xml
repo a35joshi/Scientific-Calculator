@@ -52,19 +52,25 @@
                     android:id="@+id/button_CUBE_ROOT" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="^3"
+                    android:id="@+id/button_CUBE" />
+
+                <Button
+                    android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:text="π"
                     android:id="@+id/button_PI" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="39dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/button_FACTORIAL"
                     android:text="!" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/button_HISTORY"
                     android:onClick="ShowHistory"
