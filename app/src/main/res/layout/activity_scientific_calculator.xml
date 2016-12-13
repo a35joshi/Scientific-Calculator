@@ -48,6 +48,12 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="∛"
+                    android:id="@+id/button_CUBE_ROOT" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="π"
                     android:id="@+id/button_PI" />
 
@@ -58,7 +64,7 @@
                     android:text="!" />
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button_HISTORY"
                     android:onClick="ShowHistory"

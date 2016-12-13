@@ -190,6 +190,16 @@ public class ScientificCalculator extends AppCompatActivity {
                 trigopressed=true;
             }
         });
+        findViewById(R.id.button_CUBE_ROOT).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                int start = Math.max(output.getSelectionStart(), 0);
+                int end = Math.max(output.getSelectionEnd(), 0);
+                output.getText().replace(Math.min(start, end), Math.max(start, end),"cbrt(", 0, 5);
+                output.setTextColor(Color.BLACK);
+                trigopressed=true;
+            }
+        });
         findViewById(R.id.button_PI).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -277,7 +287,7 @@ public class ScientificCalculator extends AppCompatActivity {
                     if (str.equals("SYNTAX ERROR") || str.equals("MATH ERROR")) {
                         //do nothing
                     }
-                    else if (str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
+                    else if (str.contains("cbrt(")||str.contains("sin(") || str.contains("cos(") || str.contains("tan(") || str.contains("sqrt(") || str.contains("log10(") || str.contains("log2(") || str.contains("log(")) {
                         int lengthView = output.getText().length();
                         String viewCalString = output.getText().toString();
                         if (lengthView > 0 && lengthView <= 1)
@@ -287,6 +297,9 @@ public class ScientificCalculator extends AppCompatActivity {
                                 //CharSequence last4Char=output.getText().toString().subSequence(output.getSelectionStart(),0);
                                 String last4Char = viewCalString.substring(lengthView - 4, lengthView);
                                     switch (last4Char) {
+                                        case "brt(":
+                                            output.getText().delete(lengthView - 5, lengthView);
+                                            break;
                                     case "sin(":
                                         output.getText().delete(lengthView - 4, lengthView);
                                         break;
