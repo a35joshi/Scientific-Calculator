@@ -30,8 +30,11 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 import net.objecthunter.exp4j.operator.Operator;
-import net.objecthunter.exp4j.tokenizer.Tokenizer;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 
@@ -44,7 +47,13 @@ public class ScientificCalculator extends AppCompatActivity {
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
+    FileOutputStream fos;
+    ObjectOutputStream sos;
+    FileInputStream f ;
+    ObjectInputStream s ;
     HashMap<String, String> History_Store;
+    //HASH MAP TO STORE HISTORY
+    //History_Store = new HashMap<String, String>();
     /*
      @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -141,8 +150,6 @@ public class ScientificCalculator extends AppCompatActivity {
                                       int before, int count) {
             }
         });
-        //HASH MAP TO STORE HISTORY
-        History_Store = new HashMap<String, String>();
         // valuating
         output.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View v) {
@@ -376,9 +383,14 @@ public class ScientificCalculator extends AppCompatActivity {
 
     public void ShowHistory(View view)
     {
-        Intent intent = new Intent(this, Show_History_Activity.class);
-        intent.putExtra("History_Store", History_Store);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, Show_History_Activity.class);
+            intent.putExtra("History_Store", History_Store);
+            startActivity(intent);
+        }
+        catch (Exception ex){
+
+        }
     }
     private void getoperator(){
         View.OnClickListener listener = new View.OnClickListener() {
@@ -445,9 +457,13 @@ public class ScientificCalculator extends AppCompatActivity {
             output.setTextColor(Color.BLACK);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-
+            f = openFileInput("Internal_History");
+            s = new ObjectInputStream(f);
+            History_Store = new HashMap<String, String>();
+            //History_Store = (HashMap<String, String>) s.readObject();
+            s.close();
         } catch (Exception ex) {
-            throw ex;
+
         }
 
     }
@@ -565,6 +581,15 @@ boolean verify(double result){
         output.setSelection(output.getText().length());
         if(output.getText().toString().equals("SYNTAX ERROR")||output.getText().toString().equals("MATH ERROR")){
             output.setTextColor(Color.RED);
+        }
+        try {
+            fos = openFileOutput("Internal_History", Context.MODE_PRIVATE);
+            sos = new ObjectOutputStream(fos);
+            sos.writeObject(History_Store);
+            sos.close();
+        }
+        catch (Exception ex){
+
         }
     }
 }
