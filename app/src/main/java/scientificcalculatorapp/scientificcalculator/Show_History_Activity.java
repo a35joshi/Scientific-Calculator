@@ -1,8 +1,10 @@
 package scientificcalculatorapp.scientificcalculator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,6 +26,8 @@ import java.util.Set;
 public class Show_History_Activity extends AppCompatActivity {
 TextView HistoryOutput;
     HashMap<String,String> hashMap=new HashMap<>();
+    FileOutputStream fos;
+    ObjectOutputStream sos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +48,14 @@ TextView HistoryOutput;
         try {
             hashMap.clear();
             HistoryOutput.setText("");
+            //fos = openFileOutput("Internal_History", Context.MODE_PRIVATE);
+            //sos = new ObjectOutputStream(fos);
+            //sos.writeObject(hashMap);
             Intent intent = new Intent(this, ScientificCalculator.class);
             intent.putExtra("hashmap", hashMap);
+           // intent.putExtra("sos", String.valueOf(sos));
             startActivity(intent);
+            //sos.close();
             finish();
         }
         catch (Exception ex){

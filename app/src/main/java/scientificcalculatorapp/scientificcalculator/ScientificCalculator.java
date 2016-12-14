@@ -373,14 +373,6 @@ public class ScientificCalculator extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //if (resultCode == Activity.RESULT_OK) {
-           // History_Store = (HashMap<String, Double>) data.getSerializableExtra("hashMap");
-            History_Store.clear();
-    }
-
     public void ShowHistory(View view)
     {
         try {
@@ -583,10 +575,7 @@ boolean verify(double result){
             output.setTextColor(Color.RED);
         }
         try {
-            fos = openFileOutput("Internal_History", Context.MODE_PRIVATE);
-            sos = new ObjectOutputStream(fos);
-            sos.writeObject(History_Store);
-            sos.close();
+
         }
         catch (Exception ex){
 
