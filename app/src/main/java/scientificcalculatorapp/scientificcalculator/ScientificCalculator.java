@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class ScientificCalculator extends AppCompatActivity {
     private boolean addedToClipboard = false;
     EditText output;
     HashMap<String, String> History_Store=new HashMap<>();
+    //SQLiteDatabase mydatabase;
     //HASH MAP TO STORE HISTORY
     //History_Store = new HashMap<String, String>();
     /*
@@ -439,16 +441,11 @@ public class ScientificCalculator extends AppCompatActivity {
             output.setTextColor(Color.BLACK);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-     //       f = openFileInput(file1);
-       //     s = new ObjectInputStream(f);
-            //History_Store = new HashMap<String, String>();
-         //   while(s.available()>0) {
-           //     History_Store = (HashMap<String, String>) s.readObject();
-            //}
-            //s.close();
-            //f.close();
+            //SQLiteDatabase mydatabase = openOrCreateDatabase("Operation_Store",MODE_PRIVATE,null);
+           // mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Operation(expression TEXT,result TEXT);");
+
         } catch (Exception ex) {
-           // output.setText(ex.toString());
+
         }
 
     }
@@ -591,5 +588,6 @@ boolean verify(double result){
         if(output.getText().toString().equals("SYNTAX ERROR")||output.getText().toString().equals("MATH ERROR")){
             output.setTextColor(Color.RED);
         }
+       // mydatabase.execSQL("INSERT INTO Operation VALUES(expressiontoevaluate,Double.toString(result));");
     }
 }
