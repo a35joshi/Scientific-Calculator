@@ -30,11 +30,6 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 import net.objecthunter.exp4j.operator.Operator;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 
@@ -47,11 +42,7 @@ public class ScientificCalculator extends AppCompatActivity {
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
-    FileOutputStream fos;
-    ObjectOutputStream sos;
-    FileInputStream f ;
-    ObjectInputStream s ;
-    HashMap<String, String> History_Store;
+    HashMap<String, String> History_Store=new HashMap<>();
     //HASH MAP TO STORE HISTORY
     //History_Store = new HashMap<String, String>();
     /*
@@ -403,7 +394,6 @@ public class ScientificCalculator extends AppCompatActivity {
             findViewById(id).setOnClickListener(listener);
         }
     }
-
     private void getinput() {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -449,16 +439,43 @@ public class ScientificCalculator extends AppCompatActivity {
             output.setTextColor(Color.BLACK);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            f = openFileInput("Internal_History");
-            s = new ObjectInputStream(f);
-            History_Store = new HashMap<String, String>();
-            //History_Store = (HashMap<String, String>) s.readObject();
-            s.close();
+     //       f = openFileInput(file1);
+       //     s = new ObjectInputStream(f);
+            //History_Store = new HashMap<String, String>();
+         //   while(s.available()>0) {
+           //     History_Store = (HashMap<String, String>) s.readObject();
+            //}
+            //s.close();
+            //f.close();
         } catch (Exception ex) {
-
+           // output.setText(ex.toString());
         }
 
     }
+
+   /* public static <K,V> void SaveArrayList(Context mContext, String filename, HashMap<K,V> list){
+        try {
+            FileOutputStream fos = mContext.openFileOutput(filename + ".dat", mContext.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static Object ReadArrayList(Context mContext,String filename){
+        try {
+            FileInputStream fis = mContext.openFileInput(filename + ".dat");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Object obj= (Object) ois.readObject();
+            fis.close();
+            return obj;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }*/
     private Function[] TrigFunctions = {
             new Function("sin"){public double apply(double... args){return Math.sin(Math.toRadians(args[0]));}},
             new Function("cos"){public double apply(double... args){return Math.cos(Math.toRadians(args[0]));}},
@@ -497,8 +514,8 @@ boolean verify(double result){
     void onEqualButtonClick()
     {
            try {
-                String expressiontoevaluate = output.getText().toString();
-            if(factorialpress){
+               String expressiontoevaluate = output.getText().toString();
+               if(factorialpress){
                 double result = new ExpressionBuilder(expressiontoevaluate).operator(factorial).build().evaluate();
                 if(verify(result)){
                      output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
@@ -508,7 +525,7 @@ boolean verify(double result){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
                         History_Store.put(expressiontoevaluate,result1);
-                    }
+                      }
                     else {
                         output.setText(Double.toString(result));
                         History_Store.put(expressiontoevaluate,Double.toString(result));
@@ -560,25 +577,19 @@ boolean verify(double result){
                                 else {
                                     output.setText(Double.toString(result));
                                     History_Store.put(expressiontoevaluate,Double.toString(result));
-                    }
+                                }
                 }
             }
                 findViewById(R.id.buttonDEL).setClickable(false);
         }
         catch(Exception ex){
             //output.setText(ex.toString());
-            output.setText("SYNTAX ERROR");
+           output.setText("SYNTAX ERROR");
         }
         //http://stackoverflow.com/questions/6438478/sethinttextcolor-in-edittext
         output.setSelection(output.getText().length());
         if(output.getText().toString().equals("SYNTAX ERROR")||output.getText().toString().equals("MATH ERROR")){
             output.setTextColor(Color.RED);
-        }
-        try {
-
-        }
-        catch (Exception ex){
-
         }
     }
 }

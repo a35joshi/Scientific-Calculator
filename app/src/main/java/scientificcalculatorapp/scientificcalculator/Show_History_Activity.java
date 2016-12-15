@@ -25,9 +25,7 @@ import java.util.Set;
 
 public class Show_History_Activity extends AppCompatActivity {
 TextView HistoryOutput;
-    HashMap<String,String> hashMap=new HashMap<>();
-    FileOutputStream fos;
-    ObjectOutputStream sos;
+    HashMap<String,String> hashMap=new HashMap<String, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +35,14 @@ TextView HistoryOutput;
         hashMap = (HashMap<String, String>) mIntent.getSerializableExtra("History_Store");
         //RESTful API giving correct results.
         HistoryOutput = (TextView) findViewById(R.id.Output_History);
+        if(!hashMap.isEmpty()) {
             Iterator it = hashMap.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
-                HistoryOutput.append(pair.getKey() + " = "+ "\n" + pair.getValue()+"\n");
+                HistoryOutput.append(pair.getKey() + " = " + "\n" + pair.getValue() + "\n");
                 // it.remove(); // avoids a ConcurrentModificationException
             }
+        }
     }
     public void Send_Clear_History(View view) {
         try {
