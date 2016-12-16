@@ -52,6 +52,7 @@ TextView HistoryOutput;
             //sos = new ObjectOutputStream(fos);
             //sos.writeObject(hashMap);
             Intent intent = new Intent(this, ScientificCalculator.class);
+            ScientificCalculator.SaveArrayList(this.getApplicationContext(),"Internal_History.dat",hashMap);
             intent.putExtra("hashmap", hashMap);
            // intent.putExtra("sos", String.valueOf(sos));
             startActivity(intent);

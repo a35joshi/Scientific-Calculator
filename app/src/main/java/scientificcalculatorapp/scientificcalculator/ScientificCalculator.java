@@ -16,21 +16,20 @@ import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.view.ContextMenu;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 import net.objecthunter.exp4j.operator.Operator;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 
@@ -441,6 +440,10 @@ public class ScientificCalculator extends AppCompatActivity {
             output.setTextColor(Color.BLACK);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            History_Store=(HashMap<String, String>) ReadArrayList(this.getApplicationContext(),"Internal_History.dat");
+            if(History_Store==null){
+                History_Store=new HashMap<String, String>();
+            }
             //SQLiteDatabase mydatabase = openOrCreateDatabase("Operation_Store",MODE_PRIVATE,null);
            // mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Operation(expression TEXT,result TEXT);");
 
@@ -450,7 +453,7 @@ public class ScientificCalculator extends AppCompatActivity {
 
     }
 
-   /* public static <K,V> void SaveArrayList(Context mContext, String filename, HashMap<K,V> list){
+    public static <K,V> void SaveArrayList(Context mContext, String filename, HashMap<K,V> list){
         try {
             FileOutputStream fos = mContext.openFileOutput(filename + ".dat", mContext.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -472,7 +475,7 @@ public class ScientificCalculator extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
-    }*/
+    }
     private Function[] TrigFunctions = {
             new Function("sin"){public double apply(double... args){return Math.sin(Math.toRadians(args[0]));}},
             new Function("cos"){public double apply(double... args){return Math.cos(Math.toRadians(args[0]));}},
@@ -578,6 +581,7 @@ boolean verify(double result){
                 }
             }
                 findViewById(R.id.buttonDEL).setClickable(false);
+               SaveArrayList(this.getApplicationContext(),"Internal_History.dat",History_Store);
         }
         catch(Exception ex){
             //output.setText(ex.toString());
