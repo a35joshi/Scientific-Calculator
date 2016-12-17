@@ -30,8 +30,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 
 public class ScientificCalculator extends AppCompatActivity {
     int[] numberbuttons = {R.id.button_CUBE,R.id.button_FACTORIAL, R.id.button_INVERSE, R.id.button_NEGATIVE, R.id.button_LOG_e, R.id.button_LOG_10, R.id.button_LOG_2, R.id.button_CARROT_MARK, R.id.button_SQR, R.id.buttonSIN, R.id.buttonCOS, R.id.buttonTAN, R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_OPEN_BRACKET, R.id.button_CLOSE_BRACKET, R.id.button_COMMA};
@@ -42,7 +43,9 @@ public class ScientificCalculator extends AppCompatActivity {
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
     EditText output;
+    //ArrayList<String> History_Store_New=new ArrayList<>();
     HashMap<String, String> History_Store=new HashMap<>();
+
     //SQLiteDatabase mydatabase;
     //HASH MAP TO STORE HISTORY
     //History_Store = new HashMap<String, String>();
@@ -525,10 +528,14 @@ boolean verify(double result){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
                         History_Store.put(expressiontoevaluate,result1);
-                      }
+                       // History_Store_New.add(expressiontoevaluate);
+                        //History_Store_New.add(result1);
+                    }
                     else {
                         output.setText(Double.toString(result));
                         History_Store.put(expressiontoevaluate,Double.toString(result));
+                       // History_Store_New.add(expressiontoevaluate);
+                       // History_Store_New.add(Double.toString(result));
                     }
                 }
             }
@@ -556,10 +563,14 @@ boolean verify(double result){
                       String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
                         History_Store.put(expressiontoevaluate,result1);
+                       // History_Store_New.add(expressiontoevaluate);
+                       // History_Store_New.add(result1);
                     }
                     else {
                         output.setText(Double.toString(result));
                         History_Store.put(expressiontoevaluate,Double.toString(result));
+                       // History_Store_New.add(expressiontoevaluate);
+                       // History_Store_New.add(Double.toString(result));
                     }
                 }
             }
@@ -573,6 +584,8 @@ boolean verify(double result){
                                     String result1=Double.toString(result).replace("E","*10^");
                                     output.setText(result1);
                                     History_Store.put(expressiontoevaluate,result1);
+                                    //History_Store_New.add(expressiontoevaluate);
+                                    //History_Store_New.add(Double.toString(result));
                                 }
                                 else {
                                     output.setText(Double.toString(result));

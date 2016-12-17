@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,6 +26,7 @@ import java.util.Set;
 
 public class Show_History_Activity extends AppCompatActivity {
 TextView HistoryOutput;
+    ArrayList<String> hashMap1=new ArrayList<String>();
     HashMap<String,String> hashMap=new HashMap<String, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ TextView HistoryOutput;
         Intent mIntent = getIntent();
         //shouldn't this be String now?
         hashMap = (HashMap<String, String>) mIntent.getSerializableExtra("History_Store");
+       // hashMap1=(ArrayList<String>)mIntent.getSerializableExtra("History_Store_New");
         //RESTful API giving correct results.
         HistoryOutput = (TextView) findViewById(R.id.Output_History);
         if(!hashMap.isEmpty()) {
@@ -54,9 +57,7 @@ TextView HistoryOutput;
             Intent intent = new Intent(this, ScientificCalculator.class);
             ScientificCalculator.SaveArrayList(this.getApplicationContext(),"Internal_History.dat",hashMap);
             intent.putExtra("hashmap", hashMap);
-           // intent.putExtra("sos", String.valueOf(sos));
             startActivity(intent);
-            //sos.close();
             finish();
         }
         catch (Exception ex){
