@@ -26,7 +26,7 @@ import java.util.Set;
 
 public class Show_History_Activity extends AppCompatActivity {
 TextView HistoryOutput;
-    ArrayList<String> hashMap1=new ArrayList<String>();
+    //ArrayList<String> hashMap1=new ArrayList<String>();
     HashMap<String,String> hashMap=new HashMap<String, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ TextView HistoryOutput;
         Intent mIntent = getIntent();
         //shouldn't this be String now?
         hashMap = (HashMap<String, String>) mIntent.getSerializableExtra("History_Store");
-       // hashMap1=(ArrayList<String>)mIntent.getSerializableExtra("History_Store_New");
+        //hashMap1 = (ArrayList<String>) getIntent().getSerializableExtra("History_Store_New");
         //RESTful API giving correct results.
         HistoryOutput = (TextView) findViewById(R.id.Output_History);
         if(!hashMap.isEmpty()) {
@@ -50,6 +50,7 @@ TextView HistoryOutput;
     public void Send_Clear_History(View view) {
         try {
             hashMap.clear();
+            //hashMap1.clear();
             HistoryOutput.setText("");
             //fos = openFileOutput("Internal_History", Context.MODE_PRIVATE);
             //sos = new ObjectOutputStream(fos);
@@ -57,6 +58,7 @@ TextView HistoryOutput;
             Intent intent = new Intent(this, ScientificCalculator.class);
             ScientificCalculator.SaveArrayList(this.getApplicationContext(),"Internal_History.dat",hashMap);
             intent.putExtra("hashmap", hashMap);
+            //intent.putExtra("hashmap1", hashMap1);
             startActivity(intent);
             finish();
         }

@@ -42,13 +42,10 @@ public class ScientificCalculator extends AppCompatActivity {
     boolean factorialpress = false;
     private ClipboardManager clipBoard;
     private boolean addedToClipboard = false;
+    private boolean radpress=false;
     EditText output;
-    //ArrayList<String> History_Store_New=new ArrayList<>();
+    //ArrayList<String> History_Store_New=new ArrayList<String>();
     HashMap<String, String> History_Store=new HashMap<>();
-
-    //SQLiteDatabase mydatabase;
-    //HASH MAP TO STORE HISTORY
-    //History_Store = new HashMap<String, String>();
     /*
      @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -223,6 +220,19 @@ public class ScientificCalculator extends AppCompatActivity {
                 }
             }
         });
+
+        findViewById(R.id.button_RAD).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                radpress=true;
+                Button button=(Button)v;
+                if(button.getText().toString().equals("RAD")) {
+                    button.setText("DEG");
+                }
+                else
+                    button.setText("RAD");
+               }
+        });
         findViewById(R.id.buttonequal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -373,6 +383,7 @@ public class ScientificCalculator extends AppCompatActivity {
         try {
             Intent intent = new Intent(this, Show_History_Activity.class);
             intent.putExtra("History_Store", History_Store);
+            //intent.putExtra("History_Store",History_Store_New );
             startActivity(intent);
         }
         catch (Exception ex){
@@ -449,7 +460,6 @@ public class ScientificCalculator extends AppCompatActivity {
             }
             //SQLiteDatabase mydatabase = openOrCreateDatabase("Operation_Store",MODE_PRIVATE,null);
            // mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Operation(expression TEXT,result TEXT);");
-
         } catch (Exception ex) {
 
         }
@@ -528,20 +538,21 @@ boolean verify(double result){
                         String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
                         History_Store.put(expressiontoevaluate,result1);
-                       // History_Store_New.add(expressiontoevaluate);
+                        //History_Store_New.add(expressiontoevaluate);
                         //History_Store_New.add(result1);
                     }
                     else {
                         output.setText(Double.toString(result));
                         History_Store.put(expressiontoevaluate,Double.toString(result));
-                       // History_Store_New.add(expressiontoevaluate);
-                       // History_Store_New.add(Double.toString(result));
+                       //History_Store_New.add(expressiontoevaluate);
+                        //History_Store_New.add(Double.toString(result));
                     }
                 }
             }
               else  if(trigopressed){
                     int counter_open_brackets = 0;
                     int counter_close_brackets=0;
+                    double result=0;
                     for( int i=0; i<expressiontoevaluate.length(); i++ ) {
                         if( expressiontoevaluate.charAt(i) == '(' ) {
                             counter_open_brackets++;
@@ -554,23 +565,23 @@ boolean verify(double result){
                     counter_close_brackets++;
                     expressiontoevaluate+=")";
                 }
-                    Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
-                    double result = expression.evaluate();
-                if(verify(result)){
+                      Expression expression = new ExpressionBuilder(expressiontoevaluate).functions(TrigFunctions).build();
+                       result = expression.evaluate();
+                 if(verify(result)){
                     output.setText("MATH ERROR");//SOMETHING WRONG IN INPUT
                 }else {
                     if(Double.toString(result).contains("E")){
                       String result1=Double.toString(result).replace("E","*10^");
                         output.setText(result1);
-                        History_Store.put(expressiontoevaluate,result1);
-                       // History_Store_New.add(expressiontoevaluate);
-                       // History_Store_New.add(result1);
+                       History_Store.put(expressiontoevaluate,result1);
+                        //History_Store_New.add(expressiontoevaluate);
+                        //History_Store_New.add(result1);
                     }
                     else {
                         output.setText(Double.toString(result));
                         History_Store.put(expressiontoevaluate,Double.toString(result));
-                       // History_Store_New.add(expressiontoevaluate);
-                       // History_Store_New.add(Double.toString(result));
+                       //History_Store_New.add(expressiontoevaluate);
+                        //History_Store_New.add(Double.toString(result));
                     }
                 }
             }
@@ -584,12 +595,14 @@ boolean verify(double result){
                                     String result1=Double.toString(result).replace("E","*10^");
                                     output.setText(result1);
                                     History_Store.put(expressiontoevaluate,result1);
-                                    //History_Store_New.add(expressiontoevaluate);
-                                    //History_Store_New.add(Double.toString(result));
+                                   // History_Store_New.add(expressiontoevaluate);
+                                   // History_Store_New.add(Double.toString(result));
                                 }
                                 else {
                                     output.setText(Double.toString(result));
                                     History_Store.put(expressiontoevaluate,Double.toString(result));
+                                    //History_Store_New.add(expressiontoevaluate);
+                                    //History_Store_New.add(Double.toString(result));
                                 }
                 }
             }
